@@ -34,15 +34,69 @@
             <table class="w-full">
             <thead class="bg-gray-50 border-b-2 border-gray-200">
                 <tr>
-                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Numéro de facture</th>
-                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Nom Fournisseur</th>
-                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Date Facturation</th>
-                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Date d'écheance</th>
-                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Montant HT</th>
-                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Montant TTC</th>
+                    <th class="p-3 text-sm font-semibold tracking-wide text-left">
+                        <span class="inline-flex w-full justify-between" @click="sort('numero_facture')">Numéro de facture
+                            <svg v-if="params.field === 'numero_facture' && params.direction === 'asc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z"/>
+                            </svg>
+                             <svg v-if="params.field === 'numero_facture' && params.direction === 'desc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"/>
+                            </svg>
+                        </span>
+                    </th>
+                    <th class="p-3 text-sm font-semibold tracking-wide text-left">
+                        <span class="inline-flex w-full justify-between" @click="sort('nom_fournisseur')">Nom Fournisseur
+                            <svg v-if="params.field === 'nom_fournisseur' && params.direction === 'asc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z"/>
+                            </svg>
+                            <svg v-if="params.field === 'nom_fournisseur' && params.direction === 'desc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"/>
+                            </svg>
+                        </span>
+                    </th>
+                    <th class="p-3 text-sm font-semibold tracking-wide text-left">
+                        <span class="inline-flex w-full justify-between" @click="sort('date_facturation')">Date Facturation
+                            <svg v-if="params.field === 'date_facturation' && params.direction === 'asc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z"/>
+                            </svg>
+                            <svg v-if="params.field === 'date_facturation' && params.direction === 'desc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"/>
+                            </svg>
+                        </span>
+                    </th>
+                    <th class="p-3 text-sm font-semibold tracking-wide text-left">
+                        <span class="inline-flex w-full justify-between" @click="sort('date_echeance')">Date d'écheance
+                            <svg v-if="params.field === 'date_echeance' && params.direction === 'asc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z"/>
+                            </svg>
+                            <svg v-if="params.field === 'date_echeance' && params.direction === 'desc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"/>
+                            </svg>
+                        </span>
+                    </th>
+                    <th class="p-3 text-sm font-semibold tracking-wide text-left">
+                        <span class="inline-flex w-full justify-between" @click="sort('montant_HT')">Montant HT
+                            <svg v-if="params.field === 'montant_HT' && params.direction === 'asc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z"/>
+                            </svg>
+                            <svg v-if="params.field === 'montant_HT' && params.direction === 'desc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"/>
+                            </svg>
+                        </span>
+                    </th>
+                    <th class="p-3 text-sm font-semibold tracking-wide text-left">
+                        <span class="inline-flex w-full justify-between" @click="sort('montant_TTC')">Montant TTC
+                            <svg v-if="params.field === 'montant_TTC' && params.direction === 'asc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z"/>
+                            </svg>
+                            <svg v-if="params.field === 'montant_TTC' && params.direction === 'desc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"/>
+                            </svg>
+                        </span>
+                    </th>
                 </tr>
             </thead>
-            <tbody v-for="facture in factures" :key="facture.id" class="divide-y divide-gray-100">
+            <tbody v-for="facture in factures.data" :key="facture.id" class="divide-y divide-gray-100">
                 <tr class="bg-white">
                     <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{facture.numero_facture}}</td>
                     <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{facture.nom_fournisseur}}</td>
@@ -55,8 +109,10 @@
         </table>
         </div>
 
+        <pagination class="mt-6" :links="factures.links"/>
+
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
-            <div v-for="facture in factures" :key="facture.id" class="bg-white space-y-3 p-4 rounded-lg shadow" >
+            <div v-for="facture in factures.data" :key="facture.id" class="bg-white space-y-3 p-4 rounded-lg shadow" >
                 <div class="flex items-center space-x-2 text-xs">
                     <div class="text-xs">{{facture.numero_facture}}</div>
                     <div class="text-xs">{{facture.nom_fournisseur}}</div>
@@ -87,10 +143,17 @@ const hasErrors = computed(() => Object.keys(errors.value).length > 0)
 
 <script>
  import { defineComponent } from 'vue'
+ import Pagination from '@/Components/Pagination.vue';
+ import { pickBy, throttle } from 'lodash';
+
 
     export default defineComponent({
 
-        props:['factures'],
+        components: {
+            Pagination,
+        },
+
+        props:['factures','filters'],
 
         data() {
             return {
@@ -98,21 +161,29 @@ const hasErrors = computed(() => Object.keys(errors.value).length > 0)
                     excel_file:null
                 },
                 params:{
-                    search: null,
+                    search: this.filters.search,
+                    field: this.filters.field,
+                    direction: this.filters.direction
                 },
             };
         },
+        methods: {
+            sort(field){
+                this.params.field = field;
+                this.params.direction = this.params.direction === 'asc' ? 'desc' : 'asc';
+            },
+            submit() {
+                this.$inertia.post('/import_facture', this.form)
+            },
+        },
         watch: {
             params: {
-                handler(){
-                    this.$inertia.get(this.route('factures.index'), this.params,{replace: true,preserveState:true});
-                },
+                handler: throttle(function(){
+                    let params = pickBy(this.params);
+
+                    this.$inertia.get(this.route('factures.index'), params,{replace: true,preserveState:true});
+                },150),
                 deep:true,
-            }
-        },
-        methods: {
-            submit() {
-            this.$inertia.post('/import_facture', this.form)
             },
         },
     })

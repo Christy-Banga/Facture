@@ -21,6 +21,11 @@ class FactureController extends Controller
      */
     public function index()
     {
+        request()->validate([
+            'direction' => ['in:asc,desc'],
+            'field' => ['in:numero_facture,nom_fournisseur,date_facturation,date_echeance,montant_HT,montant_TTC']
+        ]);
+
         $query = Facture::query();
 
         if(request('search')) {
@@ -30,8 +35,13 @@ class FactureController extends Controller
                   ->orWhere('date_echeance','LIKE','%'.request('search').'%');       
         }
 
+        if(request()->has(['field','direction'])){
+            $query->orderBy(request('field'), request('direction'));
+        }
+
         return Inertia::render('Facture/index',[
-            'factures' => $query->get()
+            'factures' => $query->paginate(5),
+            'filters' => request()->all(['search','field','direction'])
         ]);
     }
 
