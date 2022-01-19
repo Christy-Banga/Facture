@@ -13,11 +13,11 @@ class UserController extends Controller
 {
     /* use PasswordValidationRules; */
 
-   /*  public function __construct()
+    public function __construct()
     {
         //userPolicy
         $this->authorizeResource(User::class);
-    } */
+    } 
     /**
      * Display a listing of the resource.
      *

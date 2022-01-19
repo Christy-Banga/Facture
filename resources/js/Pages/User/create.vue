@@ -36,7 +36,7 @@
                             </div>
 
                             <div class="flex p-1">
-                                <button type="submit" class="p-2 bg-green-600 text-white hover:bg-green-800 rounded">Ajouter</button>
+                                <button type="submit" class="p-2 bg-blue-600 text-white hover:bg-blue-800 rounded">Ajouter</button>
                             </div>
                         </form>
                     </div>

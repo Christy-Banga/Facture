@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasCan;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
@@ -11,7 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, HasCan, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -43,7 +44,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $appends = [
+        'can'
+    ];
+
     public function setPasswordAttribute($password){
         $this->attributes['password'] = Hash::needsRehash($password) ? Hash::make($password) : $password;
+    }
+
+    public function checkRole($role){
+        return $this->role === $role;
     }
 }
