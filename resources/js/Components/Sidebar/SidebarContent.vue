@@ -19,7 +19,7 @@
 
         <SidebarCollapsible title="Dropdown">
             <SidebarCollapsibleItem :href="route('factures.index')" title="Facture" :active="route().current('factures.index')" />
-            <SidebarCollapsibleItem href="#" title="Link 2" :active="false" />
+            <SidebarCollapsibleItem :href="route('gestionnaire.index')" title="Gestionnaire" :active="false" />
             <SidebarCollapsibleItem href="#" title="Link 3" :active="false" />
         </SidebarCollapsible>
 

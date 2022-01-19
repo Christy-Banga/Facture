@@ -3,6 +3,7 @@
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\FactureController;
 
 /*
@@ -16,15 +17,17 @@ use App\Http\Controllers\FactureController;
 |
 */
 
-Route::get('/factures',[FactureController::class,'index'])->name('factures.index');
-Route::post('/import_facture',[FactureController::class,'import_facture'])->name('import_facture');
+Route::middleware(['auth:sanctum','verified'])->get('/facture',[FactureController::class,'index'])->name('factures.index');
+Route::middleware(['auth:sanctum','verified'])->post('/import_facture',[FactureController::class,'import_facture'])->name('import_facture');
+
+Route::middleware(['auth:sanctum','verified'])->resource('/gestionnaire', UserController::class);
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
+    return Inertia::render('Auth/Login', [
+        /* 'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+        'phpVersion' => PHP_VERSION, */
     ]);
 });
 
