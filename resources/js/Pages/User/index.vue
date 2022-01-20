@@ -5,7 +5,7 @@
                 <h2 class="text-xl font-semibold leading-tight">
                     Liste des gestionnaires
                 </h2>
-                <Link v-if="$page.props.permission.users.create" :href="route('gestionnaire.create')" class="text-white p-2 bg-blue-600 hover:bg-blue-800 px-3 py-2 float-right rounded">
+                <Link v-if="$page.props.permission.users.create" :href="route('gestionnaire.create')" class="text-white p-2 bg-blue-600 hover:bg-blue-800 dark:bg-gray-700 dark:hover:bg-gray-800 px-3 py-2 float-right rounded">
                     Add gestionnaire
                 </Link>
             </div>
@@ -33,14 +33,14 @@
                 </div>
 
                 <div class="mb-4 max-w-xs">
-                    <input type="search" v-model="params.search" aria-label="Search" placeholder="Search..." class="block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
+                    <input type="search" v-model="params.search" aria-label="Search" placeholder="Que recherchez-vous?" class="block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-800 dark:border-gray-800"/>
                 </div>
 
                 <!-- component -->
                 
-        <div class="overflow-auto rounded-lg shadow hidden md:block">
+        <div class="overflow-auto rounded-lg shadow  md:block">
             <table class="w-full">
-            <thead class="bg-gray-50 border-b-2 border-gray-200">
+            <thead class="bg-gray-50 border-b-2 border-gray-200 dark:bg-gray-700 dark:border-gray-700">
                 <tr>
                     <th class="p-3 text-sm font-semibold tracking-wide text-left">
                         <span class="inline-flex w-full justify-between" @click="sort('name')">Name
@@ -76,10 +76,10 @@
                 </tr>
             </thead>
             <tbody v-for="user in users.data" :key="user.id" class="divide-y divide-gray-100">
-                <tr class="bg-white">
-                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{user.name}}</td>
-                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{user.email}}</td>
-                    <td class="p-3 px-6 text-sm text-gray-700 whitespace-nowrap">{{user.role}}</td>
+                <tr class="bg-white dark:bg-gray-800">
+                    <td class="p-3 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{user.name}}</td>
+                    <td class="p-3 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{user.email}}</td>
+                    <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{user.role}}</td>
                     <td v-if="$page.props.permission.users.create" class="py-3 px-6 text-center">
                         <div class="flex item-center justify-center">
                             <Link v-if="user.can.update" :href="route('gestionnaire.edit', user.id)" class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110 text-purple-900">
@@ -100,15 +100,15 @@
         </div>
         <pagination class="mt-6" :links="users.links"/>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
-            <div v-for="user in users.data" :key="user.id" class="bg-white space-y-3 p-4 rounded-lg shadow" >
+        <!-- <div class="grid grid-cols-1 sm:grid-cols-1 gap-4 md:hidden">
+            <div v-for="user in users.data" :key="user.id" class="bg-white space-y-3 p-4 rounded-lg shadow dark:bg-gray-800" >
                 <div class="flex items-center space-x-6 text-sm">
                     <div class="text-sm">{{user.name}}</div>
                     <div class="text-sm">{{user.email}}</div>
                     <div class="text-sm">{{user.role}}</div>
                     <td v-if="$page.props.permission.users.create" class="py-3 px-6 text-center">
                         <div class="flex item-center justify-center">
-                            <Link v-if="user.can.update" :href="route('gestionnaire.edit', user.id)" class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110 text-purple-900">
+                            <Link v-if="user.can.update" :href="route('gestionnaire.edit', user.id)" class="w-4 mr-2 transform hover:text-white-500 hover:scale-110 text-white-900">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                 </svg>
@@ -122,7 +122,7 @@
                     </td>
                 </div>
             </div>  
-        </div>
+        </div> -->
             </div>
         </div>
     </AuthenticatedLayout>

@@ -27,7 +27,7 @@ class UserController extends Controller
     {
         request()->validate([
             'direction' => ['in:asc,desc'],
-            'field' => ['in:name,role']
+            'field' => ['in:name,email,role']
         ]);
 
         $query = User::query();
