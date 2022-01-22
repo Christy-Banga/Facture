@@ -32,8 +32,13 @@
                                 <div class="bg-red-200 py-2 my-1 text-red-500" v-if="form.errors.password">{{ form.errors.password }}</div>
                             </div>
 
-                            <div class="flex p-1">
-                                <button type="submit" class="p-2 bg-blue-600 dark:bg-gray-700 text-white hover:bg-blue-800 dark:hover:bg-gray-900 rounded">Ajouter</button>
+                            <div class="flex items-stretch">
+                                <div class="flex p-1">
+                                    <Link :href="route('gestionnaire.index')" type="submit" class="text-white p-2 bg-purple-600 hover:bg-purple-800 dark:bg-purple-700 dark:hover:bg-purple-800 px-3 py-2 float-right rounded">Retour</Link>
+                                </div>
+                                <div class="flex p-1">
+                                    <button type="submit" class="text-white p-2 bg-blue-600 hover:bg-blue-800 dark:bg-gray-700 dark:hover:bg-gray-800 px-3 py-2 float-right rounded">Ajouter</button>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -45,13 +50,7 @@
 
 <script setup>
 import AuthenticatedLayout from '@/Layouts/Authenticated'
-import Button from '@/Components/Button'
-import { GithubIcon } from '@/Components/Icons/brands'
 import { Link, useForm } from '@inertiajs/inertia-vue3'
-import GuestLayout from '@/Layouts/Guest'
-import Input from '@/Components/Input'
-import Label from '@/Components/Label'
-import ValidationErrors from '@/Components/ValidationErrors'
 
     const form = useForm({
         name: '',

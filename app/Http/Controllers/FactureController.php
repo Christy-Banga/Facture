@@ -10,10 +10,11 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\StoreFactureRequest;
 use App\Http\Requests\UpdateFactureRequest;
-
+use App\Models\User;
 
 class FactureController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -53,7 +54,7 @@ class FactureController extends Controller
 
         Excel::import(new FacturesImport, $request->file('excel_file'));
 
-        return Redirect::route('factures.index')->with('success', 'Facture importée avec succès');
+        return Redirect::route('facture.index')->with('success', 'Facture importée avec succès');
     }
 
     /**
@@ -94,9 +95,11 @@ class FactureController extends Controller
      * @param  \App\Models\Facture  $facture
      * @return \Illuminate\Http\Response
      */
-    public function edit(Facture $facture)
+    public function edit($id)
     {
-        //
+        $facture = Facture::findOrFail($id);
+
+        return Inertia::render('Facture/edit',compact('facture'));
     }
 
     /**
@@ -106,9 +109,13 @@ class FactureController extends Controller
      * @param  \App\Models\Facture  $facture
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateFactureRequest $request, Facture $facture)
+    public function update(UpdateFactureRequest $request,$id)
     {
-        //
+        $facture = Facture::findOrFail($id);
+
+        $facture->update($request->all());
+
+        return Redirect::route('facture.index')->with('warning','La facture a été modifiée!');
     }
 
     /**
@@ -117,8 +124,11 @@ class FactureController extends Controller
      * @param  \App\Models\Facture  $facture
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Facture $facture)
+    public function destroy($id)
     {
-        //
+        $user = Facture::findOrFail($id);
+        $user->delete();
+
+        return Redirect::route('facture.index')->with('danger','La Facture a été supprimé!');
     }
 }

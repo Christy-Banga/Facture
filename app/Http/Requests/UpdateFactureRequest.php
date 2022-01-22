@@ -13,7 +13,7 @@ class UpdateFactureRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,12 @@ class UpdateFactureRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'numero_facture' => 'required',
+            'nom_fournisseur' => 'required',
+            'date_facturation' => 'required',
+            'date_echeance' => 'required',
+            'montant_HT' => 'required',
+            'montant_TTC' => 'required',
         ];
     }
 }

@@ -18,8 +18,8 @@
         </SidebarLink>
 
         <SidebarCollapsible title="Dropdown">
-            <SidebarCollapsibleItem :href="route('factures.index')" title="Facture" :active="route().current('factures.index')" />
-            <SidebarCollapsibleItem v-if="$page.props.permission.users.viewAny" :href="route('gestionnaire.index')" title="Gestionnaire" :active="false" />
+            <SidebarCollapsibleItem :href="route('facture.index')" title="Facture" :active="route().current('facture.index')" />
+            <SidebarCollapsibleItem v-if="$page.props.permission.users.viewAny" :href="route('gestionnaire.index')" title="Gestionnaire" :active="route().current('gestionnaire.index')" />
             <SidebarCollapsibleItem href="#" title="Link 3" :active="false" />
         </SidebarCollapsible>
 

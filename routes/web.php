@@ -17,22 +17,20 @@ use App\Http\Controllers\FactureController;
 |
 */
 
-Route::middleware(['auth:sanctum','verified'])->get('/facture',[FactureController::class,'index'])->name('factures.index');
+Route::middleware(['auth:sanctum','verified'])->resource('/facture',FactureController::class);
+
 Route::middleware(['auth:sanctum','verified'])->post('/import_facture',[FactureController::class,'import_facture'])->name('import_facture');
 
 Route::middleware(['auth:sanctum','verified'])->resource('/gestionnaire', UserController::class);
 
-Route::get('/', function () {
-    return Inertia::render('Auth/Login', [
-        /* 'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION, */
+Route::middleware(['auth:sanctum','verified'])->get('/', function () {
+    return Inertia::render('Dashboard', [
     ]);
 });
 
-Route::get('/dashboard', function () {
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->name('dashboard');
+
 
 require __DIR__.'/auth.php';
