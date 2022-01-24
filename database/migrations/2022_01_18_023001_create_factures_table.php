@@ -21,6 +21,7 @@ class CreateFacturesTable extends Migration
             $table->date('date_echeance')->format('d-m-Y');
             $table->float('montant_HT');
             $table->float('montant_TTC');
+            $table->string('etat_paiement');
             $table->timestamps();
         });
     }

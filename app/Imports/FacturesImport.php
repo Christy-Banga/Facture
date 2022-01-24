@@ -31,7 +31,8 @@ class FacturesImport implements ToModel,WithHeadingRow
             'date_facturation' => $this->transformDate($row['date_de_facturation']),
             'date_echeance' => $this->transformDate($row['date_decheance']),
             'montant_HT' => $row['montant_ht'],
-            'montant_TTC' => $row['total']
+            'montant_TTC' => $row['total'],
+            'etat_paiement' => $row['etat_du_paiement'],
         ]);
     }
 }

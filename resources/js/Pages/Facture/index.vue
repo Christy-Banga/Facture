@@ -102,6 +102,16 @@
                             </svg>
                         </span>
                     </th>
+                    <th class="p-3 text-sm font-semibold tracking-wide text-left">
+                        <span class="inline-flex w-full justify-between" @click="sort('etat_paiement')">Etat de paiement
+                            <svg v-if="params.field === 'etat_paiement' && params.direction === 'asc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z"/>
+                            </svg>
+                            <svg v-if="params.field === 'etat_paiement' && params.direction === 'desc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"/>
+                            </svg>
+                        </span>
+                    </th>
                     <th v-if="$page.props.permission.users.create">Actions</th>
                 </tr>
             </thead>
@@ -113,6 +123,10 @@
                     <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{facture.date_echeance}}</td>
                     <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{facture.montant_HT}} Dhs</td>
                     <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{facture.montant_TTC}} Dhs</td>
+                    <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">
+                        <span v-if="facture.etat_paiement === 'Non payées'" class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">{{facture.etat_paiement}}</span>
+                        <span v-else class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">{{facture.etat_paiement}}</span>   
+                    </td>
                     <td v-if="$page.props.permission.users.create" class="py-3 px-6 text-center">
                         <div class="flex item-center justify-center" >
                             <Link :href="route('facture.edit', facture.id)" class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110 text-purple-900">
@@ -143,6 +157,7 @@
                     <div class="text-xs">{{facture.date_echeance}}</div>
                     <div class="text-xs">{{facture.montant_HT}}</div>
                     <div class="text-xs">{{facture.montant_TTC}}</div>
+                    <div class="text-xs">{{facture.etat_paiement}}</div>
                 </div>
             </div>  
         </div>
