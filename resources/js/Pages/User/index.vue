@@ -81,7 +81,7 @@
                                 <td class="p-3 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{user.email}}</td>
                                 <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{user.role}}</td>
                                 <td v-if="$page.props.permission.users.create" class="py-3 px-6 text-center">
-                                    <div class="flex item-center justify-center">
+                                    <div class="flex item-center justify-center" v-show="user.role != 'admin'">
                                         <Link v-if="user.can.update" :href="route('gestionnaire.edit', user.id)" class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110 text-purple-900">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
