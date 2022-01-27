@@ -17,7 +17,7 @@
             </template>
         </SidebarLink>
 
-        <SidebarCollapsible title="Dropdown">
+        <SidebarCollapsible title="Menu">
             <SidebarCollapsibleItem :href="route('facture.index')" title="Facture" :active="route().current('facture.index')" />
             <SidebarCollapsibleItem v-if="$page.props.permission.users.viewAny" :href="route('gestionnaire.index')" title="Gestionnaire" :active="route().current('gestionnaire.index')" />
             <SidebarCollapsibleItem href="#" title="Link 3" :active="false" />

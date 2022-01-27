@@ -9,12 +9,12 @@
         <form @submit.prevent="submit">
             <div class="grid gap-6">
                 <div class="space-y-2">
-                    <Label for="email" value="Email" />
+                    <Label for="login" value="Email/Username" />
                     <InputIconWrapper>
                         <template #icon>
                             <MailIcon aria-hidden="true" class="w-5 h-5" />
                         </template>
-                        <Input withIcon id="email" type="email" class="block w-full" placeholder="Email" v-model="form.email" required autofocus autocomplete="username" />
+                        <Input withIcon id="login" type="text" class="block w-full" placeholder="Email" v-model="form.login" required autofocus autocomplete="login" />
                     </InputIconWrapper>
                 </div>
 
@@ -74,7 +74,7 @@ const props = defineProps({
 })
 
 const form = useForm({
-    email: '',
+    login: '',
     password: '',
     remember: false
 })

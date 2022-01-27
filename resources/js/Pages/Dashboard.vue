@@ -13,7 +13,7 @@
         <div class="container mx-auto px-6 py-0">
             <div class="mt-4">
                 <div class="flex flex-wrap -mx-6">
-                    <div class="w-full px-6 sm:w-1/2 xl:w-1/3">
+                    <div class="w-full px-6 sm:w-1/2 xl:w-1/3" v-if="$page.props.permission.users.viewAny">
                         <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white dark:bg-gray-800">
                             <div class="p-3 rounded-full bg-indigo-600 bg-opacity-75">
                                 <svg class="h-8 w-8 dark:text-white" viewBox="0 0 28 30" fill="none"
@@ -91,9 +91,9 @@ import AuthenticatedLayout from '@/Layouts/Authenticated'
 <script>
 export default {
     props:{
-        users: Object,
-        factures:Object,
-        facturePayée: Object
+        users: Number,
+        factures:Number,
+        facturePayée: Number
     }
 }
 </script>

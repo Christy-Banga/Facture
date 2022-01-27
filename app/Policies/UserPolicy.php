@@ -17,7 +17,7 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->checkRole('user');
+        return false;
     }
 
     /**
@@ -53,9 +53,9 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        /* return $user->id === $model->id; */
+         return $user->id === $model->id; 
 
-        return $user->checkRole('admin');
+        /* return $user->checkRole('admin'); */
     }
 
     /**

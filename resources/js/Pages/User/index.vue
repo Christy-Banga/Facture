@@ -132,6 +132,7 @@
 
         methods: {
             destroy(id) {
+                if(confirm('Voulez-vous vraiment supprimé cet utilisateur?'))
                 this.$inertia.delete(route("gestionnaire.destroy", id));
             },
 

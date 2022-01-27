@@ -215,6 +215,7 @@ const hasErrors = computed(() => Object.keys(errors.value).length > 0)
             },
 
              destroy(id) {
+                 if(confirm('Voulez-vous vraiment supprimé cette facture?'))
                 this.$inertia.delete(route("facture.destroy", id));
             },
         },

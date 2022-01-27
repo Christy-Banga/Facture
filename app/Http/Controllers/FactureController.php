@@ -24,8 +24,7 @@ class FactureController extends Controller
     {
         request()->validate([
             'direction' => ['in:asc,desc'],
-            'field' => ['in:numero_facture,nom_fournisseur,date_facturation,date_echeance,
-            montant_HT,montant_TTC,etat_paiement']
+            'field' => ['in:numero_facture,nom_fournisseur,date_facturation,date_echeance,montant_HT,montant_TTC,etat_paiement']
         ]);
 
         $query = Facture::query();
