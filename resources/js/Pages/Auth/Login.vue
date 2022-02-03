@@ -9,7 +9,7 @@
         <form @submit.prevent="submit">
             <div class="grid gap-6">
                 <div class="space-y-2">
-                    <Label for="login" value="Email/Username" />
+                    <Label for="login" value="Username" />
                     <InputIconWrapper>
                         <template #icon>
                             <MailIcon aria-hidden="true" class="w-5 h-5" />
@@ -46,12 +46,12 @@
                     </Button>
                 </div>
 
-                <p class="text-sm text-gray-600 dark:text-gray-400">
+                <!-- <p class="text-sm text-gray-600 dark:text-gray-400">
                     Don't have an account?
                     <Link :href="route('register')" class="text-blue-500 hover:underline">
                         Register
                     </Link>
-                </p>
+                </p> -->
             </div>
         </form>
     </GuestLayout>

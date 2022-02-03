@@ -88,15 +88,14 @@
                 </div> -->
 
             <div class="py-10">
-                <div class="max-w-7xl mx-auto sm:px-6">
+                <div class="">
                     <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg dark:bg-gray-800">                   
+                        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">                   
                             <apexchart :width="chart.width" :height="chart.height" :type="chart.type" :options="chart.options" :series="chart.series"></apexchart>
                         </div>
-
-                        <!-- <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">    
-                            <apexchart :width="chart.width" :height="chart.height" :type="chart.type" :options="chart.options" :series="chart.series"></apexchart>
-                        </div> -->
+                        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">    
+                            <apexchart :width="chart2.width" :height="chart2.height" :type="chart2.type" :options="chart2.options" :series="chart2.series"></apexchart>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -113,6 +112,7 @@ import AuthenticatedLayout from '@/Layouts/Authenticated'
 export default {
     props:{
         chart: Object,
+        chart2: Object,
         users: Number,
         factures: Number,
         facturePayée: Number

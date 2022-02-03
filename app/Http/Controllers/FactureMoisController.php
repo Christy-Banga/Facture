@@ -28,7 +28,16 @@ class FactureMoisController extends Controller
             ->count();
 
         $TotalFacture = Facture::count();
-                
+
+        /* $TotalFactureMois = Facture::select(DB::raw("COUNT(*) as count"))
+       ->whereYear("created_at",date('Y'))
+        ->groupBy(DB::raw("Month(date_facturation)"))
+        ->pluck('count'); */
+
+        $prixTotalFacture =  DB::table('factures')->sum('montant_TTC');
+        $prixMinFacture =  DB::table('factures')->min('montant_TTC');
+        $prixMaxFacture =  DB::table('factures')->max('montant_TTC');
+                 
 
         return Inertia::render('test',[
             'users' => User::count(),
@@ -36,9 +45,15 @@ class FactureMoisController extends Controller
             'facturePayée' => $facturePayée,
             'chart' => LarapexChart::pieChart()
                 ->setTitle('Total facture, payées, non payées')
-                ->addData([$factureNonPayée,$facturePayée,$TotalFacture])
+                ->addData([$TotalFacture,$facturePayée,$factureNonPayée])
                 ->setColors(['#ffc63b', '#ff6384','#D6652F'])
-                ->setLabels(['Total facture non payée', 'Total facture payée','Total facture'])
+                ->setLabels(['Total facture','Facture payée','Facture non payée'])
+                ->toVue(),
+            'chart2' => LarapexChart::donutChart()
+                ->setTitle('Total prix des factures')
+                ->setSubtitle('')
+                ->addData([$prixTotalFacture, $prixMinFacture, $prixMaxFacture])
+                ->setLabels(['Prix total', 'Prix minimal', 'Prix maximal'])
                 ->toVue()
         ]);
     }
