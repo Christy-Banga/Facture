@@ -4,7 +4,7 @@
             <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <h2 class="text-xl font-semibold leading-tight">
                     Liste des factures
-                </h2>  
+                </h2>
             </div>
         </template>
 
@@ -22,15 +22,15 @@
         <div v-if="$page.props.flash.warning"  class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative" role="alert">
             <span class="block sm:inline">{{ $page.props.flash.warning }}</span>
         </div>
-       
+
         <div v-if="$page.props.flash.danger" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
             {{ $page.props.flash.danger }}
         </div>
-       
-        <form @submit.prevent="submit" class="my-4" enctype="multipart/form-data">    
+
+        <form @submit.prevent="submit" class="my-4" enctype="multipart/form-data">
             <input type="file" class="w-58 px-4 py-2 mt-2 border rounded-md focus:outline-none
                 focus:ring-1 focus:ring-blue-600 dark:border-gray-800" @input="form.excel_file = $event.target.files[0]" />
-            <button type="submit" class="bg-blue-500 rounded mx-7 my-3 px-2 p-1 text-white">Upload excel file</button>    
+            <button type="submit" class="bg-blue-500 rounded mx-7 my-3 px-2 p-1 text-white">Upload excel file</button>
         </form>
 
         <div class="mb-4 max-w-xs">
@@ -125,7 +125,7 @@
                     <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{facture.montant_TTC}} Dhs</td>
                     <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">
                         <span v-if="facture.etat_paiement === 'Non payées'" class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">{{facture.etat_paiement}}</span>
-                        <span v-else class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">{{facture.etat_paiement}}</span>   
+                        <span v-else class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">{{facture.etat_paiement}}</span>
                     </td>
                     <td v-if="$page.props.permission.users.create" class="py-3 px-6 text-center">
                         <div class="flex item-center justify-center" >
@@ -159,7 +159,7 @@
                     <div class="text-xs">{{facture.montant_TTC}}</div>
                     <div class="text-xs">{{facture.etat_paiement}}</div>
                 </div>
-            </div>  
+            </div>
         </div>
 
     </AuthenticatedLayout>

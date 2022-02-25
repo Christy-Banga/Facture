@@ -16,13 +16,13 @@
                     <form @submit.prevent="submit">
                         <div class="mb-4">
                             <label for="numero_facture" class="text-xl text-gray-600 dark:text-white">Numéro de facture <span class="text-red-500">*</span></label>
-                            <input type="text" v-model="form.numero_facture" class="border-2 border-gray-300 p-2 w-full dark:border-gray-700 dark:bg-gray-900" id="numero_facture">
+                            <input type="text" v-model="form.numero_facture" disabled class="border-2 border-gray-300 p-2 w-full dark:border-gray-700 dark:bg-gray-900" id="numero_facture">
                             <div class="bg-red-200 py-2 my-1 text-red-500" v-if="form.errors.numero_facture">{{ form.errors.numero_facture }}</div>
                         </div>
 
                         <div class="mb-4">
                             <label for="numero_facture" class="text-xl text-gray-600 dark:text-white">Nom Fournisseur <span class="text-red-500">*</span></label>
-                            <input type="text" v-model="form.nom_fournisseur" class="border-2 border-gray-300 p-2 w-full dark:border-gray-700 dark:bg-gray-900" id="nom_fournisseur">
+                            <input type="text" v-model="form.nom_fournisseur" disabled class="border-2 border-gray-300 p-2 w-full dark:border-gray-700 dark:bg-gray-900" id="nom_fournisseur">
                             <div class="bg-red-200 py-2 my-1 text-red-500" v-if="form.errors.nom_fournisseur">{{ form.errors.nom_fournisseur }}</div>
                         </div>
 
