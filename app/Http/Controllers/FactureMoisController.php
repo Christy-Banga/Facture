@@ -34,7 +34,7 @@ class FactureMoisController extends Controller
         $prixMaxFacture =  DB::table('factures')->max('montant_TTC'); */
 
 
-        return Inertia::render('test',[
+        return Inertia::render('Dashboard',[
             'users' => User::count(),
             'Totalfacture' => $TotalFacture,
             'facturePayée' => $facturePayée,

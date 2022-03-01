@@ -36,11 +36,14 @@ class MonthlyFactureChart
             $datas[$i] = 0;
         }
 
+
         return $this->chart->barChart()
-            ->setTitle('San Francisco vs Boston.')
-            ->setSubtitle('Wins during season 2021.')
-            ->addData('San Francisco', $datas)
+            ->setTitle('Nombre de facture par mois.')
+            ->setSubtitle('Wins during season 2022.')
+            ->addData('Nombre', ($datas))
             ->setXAxis(['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin','Juillet','Août','Septembre','Octobre','Novembre','Decembre'])
+            ->setFontColor('#97774f')
+            ->setFontFamily('DM Sans')
             ->toVue();
     }
 }

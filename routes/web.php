@@ -25,8 +25,6 @@ use ArielMejiaDev\LarapexCharts\Facades\LarapexChart;
 Route::middleware(['auth:sanctum','verified'])->resource('/facture',FactureController::class);
 
 Route::middleware(['auth:sanctum','verified'])->post('/import_facture',[FactureController::class,'import_facture'])->name('import_facture');
-Route::middleware(['auth:sanctum','verified'])->post('/import_parse',[FactureController::class,'import_parse'])->name('import_parse');
-
 
 Route::middleware(['auth:sanctum','verified'])->resource('/gestionnaire', UserController::class);
 

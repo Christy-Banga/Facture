@@ -7,13 +7,13 @@
                 </h2>
             </div>
         </template>
-       
-            
-       
+
+
+
         <div class="container mx-auto px-6 py-0">
             <div class="mt-4">
                 <div class="flex flex-wrap -mx-6">
-                    <div class="w-full px-6 sm:w-1/2 xl:w-1/3" v-if="$page.props.permission.users.viewAny">
+                    <!-- <div class="w-full px-6 sm:w-1/2 xl:w-1/3" v-if="$page.props.permission.users.viewAny">
                         <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white dark:bg-gray-800">
                             <div class="p-3 rounded-full bg-indigo-600 bg-opacity-75">
                                 <svg class="h-8 w-8 dark:text-white" viewBox="0 0 28 30" fill="none"
@@ -38,14 +38,14 @@
                                         fill="currentColor"></path>
                                 </svg>
                             </div>
-    
+
                             <div class="mx-5">
                                 <h4 class="text-2xl font-semibold text-gray-700 dark:text-white">{{users}}</h4>
                                 <div class="text-gray-500 dark:text-white">Total Gestionnaires</div>
                             </div>
                         </div>
-                    </div>
-    
+                    </div> -->
+
                     <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 sm:mt-0">
                         <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white dark:bg-gray-800">
                             <div class="p-3 rounded-full bg-orange-600 bg-opacity-75">
@@ -54,31 +54,75 @@
                                     <path d="M2.354.646a.5.5 0 0 0-.801.13l-.5 1A.5.5 0 0 0 1 2v13H.5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1H15V2a.5.5 0 0 0-.053-.224l-.5-1a.5.5 0 0 0-.8-.13L13 1.293l-.646-.647a.5.5 0 0 0-.708 0L11 1.293l-.646-.647a.5.5 0 0 0-.708 0L9 1.293 8.354.646a.5.5 0 0 0-.708 0L7 1.293 6.354.646a.5.5 0 0 0-.708 0L5 1.293 4.354.646a.5.5 0 0 0-.708 0L3 1.293 2.354.646zm-.217 1.198.51.51a.5.5 0 0 0 .707 0L4 1.707l.646.647a.5.5 0 0 0 .708 0L6 1.707l.646.647a.5.5 0 0 0 .708 0L8 1.707l.646.647a.5.5 0 0 0 .708 0L10 1.707l.646.647a.5.5 0 0 0 .708 0L12 1.707l.646.647a.5.5 0 0 0 .708 0l.509-.51.137.274V15H2V2.118l.137-.274z"/>
                                 </svg>
                             </div>
-    
+
                             <div class="mx-5">
-                                <h4 class="text-2xl font-semibold text-gray-700 dark:text-white">{{factures}}</h4>
+                                <h4 class="text-2xl font-semibold text-gray-700 dark:text-white">{{compteurTotalFacture}}</h4>
                                 <div class="text-gray-500 dark:text-white">Total factures</div>
                             </div>
                         </div>
                     </div>
-    
+
                     <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 xl:mt-0">
                         <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white dark:bg-gray-800">
-                            <div class="p-3 rounded-full bg-pink-600 bg-opacity-75">
+                            <div class="p-3 rounded-full bg-green-600 bg-opacity-75">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-receipt dark:text-white" viewBox="0 0 16 16">
                                     <path d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z"/>
                                     <path d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"/>
                                 </svg>
                             </div>
-    
+
                             <div class="mx-5">
-                                <h4 class="text-2xl font-semibold text-gray-700 dark:text-white">{{facturePayée}}</h4>
-                                <div class="text-gray-500 dark:text-white">Total factures payées</div>
+                                <h4 class="text-2xl font-semibold text-gray-700 dark:text-white">{{compteurFacturePayée}}</h4>
+                                <div class="text-gray-500 dark:text-white">Factures payées</div>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 xl:mt-0">
+                        <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white dark:bg-gray-800">
+                            <div class="p-3 rounded-full bg-red-600 bg-opacity-75">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-receipt dark:text-white" viewBox="0 0 16 16">
+                                    <path d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z"/>
+                                    <path d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"/>
+                                </svg>
+                            </div>
+
+                            <div class="mx-5">
+                                <h4 class="text-2xl font-semibold text-gray-700 dark:text-white">{{compteurFactureNonPayée}}</h4>
+                                <div class="text-gray-500 dark:text-white">Factures non payées</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+
+            <div class="col-span-12 mt-5">
+                <div class="grid gap-2 grid-cols-2 lg:grid-cols-1">
+                    <!-- <div class="bg-white shadow-xl p-4 rounded-lg">
+                        <apexchart :width="chart.width" :height="chart.height" :type="chart.type" :options="chart.options" :series="chart.series"></apexchart>
+                    </div> -->
+                    <div class="bg-white shadow-xl rounded-lg dark:bg-gray-800">
+                        <apexchart :width="chart.width" :height="chart.height" :type="chart.type" :options="chart.options" :series="chart.series"></apexchart>
+                    </div>
+                   <!--  <div class="bg-white shadow-xl rounded-lg">
+                        <apexchart :width="chart2.width" :height="chart2.height" :type="chart2.type" :options="chart2.options" :series="chart2.series"></apexchart>
+                    </div> -->
+                </div>
+            </div>
+
+     <!--        <div class="py-10">
+                <div class="">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                            <apexchart :width="chart.width" :height="chart.height" :type="chart.type" :options="chart.options" :series="chart.series"></apexchart>
+                        </div>
+                        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                            <apexchart :width="chart2.width" :height="chart2.height" :type="chart2.type" :options="chart2.options" :series="chart2.series"></apexchart>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
         </div>
 
     </AuthenticatedLayout>
@@ -91,9 +135,39 @@ import AuthenticatedLayout from '@/Layouts/Authenticated'
 <script>
 export default {
     props:{
+        chart: Object,
         users: Number,
-        factures:Number,
-        facturePayée: Number
-    }
+        Totalfacture: Number,
+        facturePayée: Number,
+        factureNonPayée: Number,
+        datas: Object
+    },
+
+    data() {
+
+        return {
+            compteurTotalFacture:0,
+            compteurFacturePayée:0,
+            compteurFactureNonPayée:0,
+            interval: null,
+            max: false
+        }
+    },
+
+    mounted () {
+    this.interval = setInterval(() => {
+        if(this.compteurTotalFacture < this.facturePayée + this.factureNonPayée){
+            this.compteurTotalFacture++
+        }else{
+            this.max = true
+        }if(this.compteurFacturePayée < this.Totalfacture - this.factureNonPayée){
+            this.compteurFacturePayée++
+        }else{
+            this.max = true
+        }if(this.compteurFactureNonPayée < this.Totalfacture - this.facturePayée){
+            this.compteurFactureNonPayée++
+        }
+    }, 90)
+  },
 }
 </script>
