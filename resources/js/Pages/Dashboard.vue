@@ -96,6 +96,13 @@
                 </div>
             </div>
 
+            <div class="pt-5">
+                <label for="cars">Sélectionnez une année:</label>
+
+                <select class="border-2 border-gray-300 rounded p-2 mx-2 dark:bg-gray-800 dark:border-gray-800" name="year" v-model="selectedYear" @change='changeYear()'>
+                    <option v-for="year in years" :key="year.year" :value="year.year">{{year.year}}</option>
+                </select>
+            </div>
 
             <div class="col-span-12 mt-5">
                 <div class="grid gap-2 grid-cols-2 lg:grid-cols-1">
@@ -140,17 +147,24 @@ export default {
         Totalfacture: Number,
         facturePayée: Number,
         factureNonPayée: Number,
-        datas: Object
+        years: Array,
     },
 
     data() {
 
         return {
+            selectedYear : null,
             compteurTotalFacture:0,
             compteurFacturePayée:0,
             compteurFactureNonPayée:0,
             interval: null,
-            max: false
+            max: false,
+        }
+    },
+
+    methods: {
+        changeYear(){
+            this.$inertia.get('/dashboard', { year: this.selectedYear }, { replace: true })
         }
     },
 
@@ -167,7 +181,7 @@ export default {
         }if(this.compteurFactureNonPayée < this.Totalfacture - this.facturePayée){
             this.compteurFactureNonPayée++
         }
-    }, 90)
+    }, 10)
   },
 }
 </script>

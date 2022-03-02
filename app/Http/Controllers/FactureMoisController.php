@@ -14,6 +14,7 @@ use ArielMejiaDev\LarapexCharts\Facades\LarapexChart;
 class FactureMoisController extends Controller
 {
     public function index(MonthlyFactureChart $chart){
+        $year = request()->input("year");
 
         $facturePayée = DB::table('factures')
         ->select(DB::raw('count(*) as total, etat_paiement'))
@@ -29,19 +30,26 @@ class FactureMoisController extends Controller
 
         $TotalFacture = Facture::count();
 
+        $years = $this->fetch_year();
+
+
         /* $prixTotalFacture =  DB::table('factures')->sum('montant_TTC');
         $prixMinFacture =  DB::table('factures')->min('montant_TTC');
         $prixMaxFacture =  DB::table('factures')->max('montant_TTC'); */
-
-
         return Inertia::render('Dashboard',[
             'users' => User::count(),
             'Totalfacture' => $TotalFacture,
             'facturePayée' => $facturePayée,
             'factureNonPayée' => $factureNonPayée,
-            'chart' => $chart->build()
+            'chart' => $chart->build($year),
+            'years' => $years
         ]);
     }
 
-
+    public function fetch_year(){
+        $years =  Facture::selectRaw("DATE_FORMAT(created_at, '%Y') AS year")
+        ->groupBy('year')
+        ->get();
+        return $years;
+    }
 }
