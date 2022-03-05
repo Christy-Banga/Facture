@@ -28,7 +28,7 @@ Route::middleware(['auth:sanctum','verified'])->post('/import_facture',[FactureC
 
 Route::middleware(['auth:sanctum','verified'])->resource('/gestionnaire', UserController::class);
 
-Route::middleware(['auth:sanctum','verified'])->get('/dashboard',[FactureMoisController::class,'index'])->name('dashboard');
+Route::middleware(['auth:sanctum','verified'])->get('/',[FactureMoisController::class,'index'])->name('dashboard');
 
 
 

@@ -164,7 +164,7 @@ export default {
 
     methods: {
         changeYear(){
-            this.$inertia.get('/dashboard', { year: this.selectedYear }, { replace: true })
+            this.$inertia.get('/', { year: this.selectedYear }, { replace: true })
         }
     },
 

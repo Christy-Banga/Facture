@@ -50,7 +50,6 @@ class MonthlyFactureChart
 
         return $this->chart->barChart()
             ->setTitle('Nombre total de factures par mois')
-            ->setSubtitle($year,'')
             ->addData('Nombre', ($datas))
             ->setXAxis(['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin','Juillet','Août','Septembre','Octobre','Novembre','Decembre'])
             ->setFontColor('#97774f')

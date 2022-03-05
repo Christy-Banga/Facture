@@ -37,7 +37,19 @@
                                     <Link :href="route('gestionnaire.index')" type="submit" class="text-white p-2 bg-purple-600 hover:bg-purple-800 dark:bg-purple-700 dark:hover:bg-purple-800 px-3 py-2 float-right rounded">Retour</Link>
                                 </div>
                                 <div class="flex p-1">
-                                    <button type="submit" class="text-white p-2 bg-blue-600 hover:bg-blue-800 dark:bg-gray-700 dark:hover:bg-gray-800 px-3 py-2 float-right rounded">Ajouter</button>
+                                    <button type="submit" class="text-white p-2 bg-blue-600 hover:bg-blue-800 dark:bg-gray-700 dark:hover:bg-gray-800 px-3 py-2 float-right rounded">
+                                            <svg v-show="isLoading" class="w-5 h-5 text-white animate-spin absolute ml-4" fill="none"
+                                                viewBox="0 0 24 24"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                                <path class="opacity-75"
+                                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                                    fill="currentColor">
+                                                </path>
+                                            </svg>
+
+                                        <span :class="{'invisible': isLoading}">Ajouter</span>
+                                        </button>
                                 </div>
                             </div>
                         </form>
@@ -49,6 +61,10 @@
 </template>
 
 <script setup>
+import {ref} from 'vue';
+const isLoading = ref(false);
+
+
 import AuthenticatedLayout from '@/Layouts/Authenticated'
 import { Link, useForm } from '@inertiajs/inertia-vue3'
 
@@ -59,6 +75,8 @@ import { Link, useForm } from '@inertiajs/inertia-vue3'
     })
 
     const submit = () => {
+         isLoading.value = true;
+    setTimeout(() => isLoading.value = false,500);
         form.post('/gestionnaire'), {
     }
 }
