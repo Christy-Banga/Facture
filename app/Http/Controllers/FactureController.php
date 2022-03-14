@@ -33,7 +33,7 @@ class FactureController extends Controller
             $query->where('numero_facture','LIKE','%'.request('search').'%')
                   ->orWhere('nom_fournisseur','LIKE','%'.request('search').'%')
                   ->orWhere('date_facturation','LIKE','%'.request('search').'%')
-                  ->orWhere('date_echeance','LIKE','%'.request('search').'%');       
+                  ->orWhere('date_echeance','LIKE','%'.request('search').'%');
         }
 
         if(request()->has(['field','direction'])){

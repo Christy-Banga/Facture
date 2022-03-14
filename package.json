@@ -10,27 +10,27 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "@heroicons/vue": "^1.0.4",
+        "@heroicons/vue": "^1.0.6",
         "@inertiajs/inertia": "^0.10.0",
         "@inertiajs/inertia-vue3": "^0.5.1",
         "@inertiajs/progress": "^0.2.6",
-        "@tailwindcss/forms": "^0.4.0",
+        "@tailwindcss/forms": "^0.4.1",
         "@vue/babel-plugin-jsx": "^1.1.0",
-        "@vue/compiler-sfc": "^3.0.5",
+        "@vue/compiler-sfc": "^3.2.31",
         "@vueuse/core": "^6.5.3",
         "autoprefixer": "^10.3.7",
         "axios": "^0.21",
-        "laravel-mix": "^6.0.6",
+        "laravel-mix": "^6.0.43",
         "lodash": "^4.17.19",
         "perfect-scrollbar": "^1.5.2",
-        "postcss": "^8.3.9",
+        "postcss": "^8.4.8",
         "postcss-import": "^14.0.2",
-        "tailwindcss": "^3.0.7",
-        "vue": "^3.0.5",
+        "tailwindcss": "^3.0.23",
+        "vue": "^3.2.31",
         "vue-loader": "^16.1.2"
     },
     "dependencies": {
-        "apexcharts": "^3.33.0",
+        "apexcharts": "^3.33.2",
         "vue3-apexcharts": "^1.4.1"
     }
 }
