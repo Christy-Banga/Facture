@@ -26,6 +26,11 @@ Route::middleware(['auth:sanctum','verified'])->resource('/facture',FactureContr
 
 Route::middleware(['auth:sanctum','verified'])->post('/import_facture',[FactureController::class,'import_facture'])->name('import_facture');
 
+Route::middleware(['auth:sanctum','verified'])->post('/display_line',[FactureController::class,'displayLine'])->name('display_line');
+
+Route::middleware(['auth:sanctum','verified'])->get('/display_lines',[FactureController::class,'displayLine'])->name('display_lines');
+
+
 Route::middleware(['auth:sanctum','verified'])->resource('/gestionnaire', UserController::class);
 
 Route::middleware(['auth:sanctum','verified'])->get('/',[FactureMoisController::class,'index'])->name('dashboard');

@@ -52,9 +52,47 @@ class FactureController extends Controller
             'excel_file' => 'required|mimes:xls,xlsx'
         ]);
 
-        Excel::import(new FacturesImport, $request->file('excel_file'));
+        Excel::import(new FacturesImport, storage_path('app/temp/current.xlsx'));
 
-        return Redirect::route('facture.index')->with('success', 'Facture importée avec succès');
+        $lines = (new FacturesImport)->toArray(storage_path('app/temp/current.xlsx'));
+        /* dd($lines); */
+
+/*         return Redirect::route('facture.Line')->with('success', 'Facture importée avec succès');
+ */
+        return Inertia::render('Facture.Line',[
+            'lines' => $lines
+        ]);
+ }
+
+
+    public function displayLine(Request $request)
+    {
+        $request->validate([
+            'excel_file' => 'required|mimes:xls,xlsx'
+        ]);
+
+
+        $fileToUpload =  $request->file('excel_file');
+        $extension = $fileToUpload->getClientOriginalExtension();
+        $fileName = 'current.'.$extension;
+        $file_path = storage_path('app/temp/'.$fileName);
+
+        if (!$fileToUpload->storeAs($file_path, $fileName))
+        {
+            dd('upload échoué');
+        }
+
+
+
+/*         Excel::import(new FacturesImport, storage_path('app/temp/current.xlsx'));
+ */
+        $lines = (new FacturesImport)->toArray($file_path);
+
+
+
+        return Inertia::render('Facture.Line',[
+            'lines' => $lines
+        ])->with('success', 'Facture importée avec succès');
     }
 
     /**
