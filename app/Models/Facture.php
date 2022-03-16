@@ -16,6 +16,7 @@ class Facture extends Model
         'date_echeance',
         'montant_HT',
         'montant_TTC',
-        'etat_paiement'
+        'etat_paiement',
+        'file'
     ];
 }

@@ -35,6 +35,12 @@ class FacturesImport implements ToModel,WithHeadingRow
             'montant_HT' => $row['montant_ht'],
             'montant_TTC' => $row['total'],
             'etat_paiement' => $row['etat_du_paiement'],
+            'file' => $this->fileName,
         ]);
+    }
+
+    public function __construct($fileName = null)
+    {
+        $this->fileName = $fileName;
     }
 }

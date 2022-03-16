@@ -27,14 +27,14 @@
             {{ $page.props.flash.danger }}
         </div>
 
-        <form @submit.prevent="submit" class="my-4" enctype="multipart/form-data">
+       <!--  <form @submit.prevent="submit" class="my-4" enctype="multipart/form-data">
             <input type="file" class="w-58 px-4 py-2 mt-2 form-control dark:bg-gray-800 px-3
             py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding dark:border-gray-800
             border border-solid border-gray-300 rounded transition ease-in-out dark:text-white
             m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             @input="form.excel_file = $event.target.files[0]" />
             <button type="submit" class="bg-blue-500 rounded mx-7 my-3 px-2 p-1 text-white">Voir les lignes</button>
-        </form>
+        </form> -->
 
         <div class="mb-4 max-w-xs">
             <input type="search" v-model="params.search" aria-label="Search" placeholder="Que recherchez-vous?"
@@ -213,9 +213,9 @@ const hasErrors = computed(() => Object.keys(errors.value).length > 0)
                 this.params.field = field;
                 this.params.direction = this.params.direction === 'asc' ? 'desc' : 'asc';
             },
-            submit() {
+           /*  submit() {
                 this.$inertia.post('/display_line', this.form)
-            },
+            }, */
 
              destroy(id) {
                  if(confirm('Voulez-vous vraiment supprimé cette facture?'))

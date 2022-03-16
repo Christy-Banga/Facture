@@ -36,10 +36,10 @@
             <button type="submit" class="bg-blue-500 rounded mx-7 my-3 px-2 p-1 text-white">Upload excel file</button>
         </form>
 
-        <div class="mb-4 max-w-xs">
+       <!--  <div class="mb-4 max-w-xs">
             <input type="search" v-model="params.search" aria-label="Search" placeholder="Que recherchez-vous?"
             class="block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-800 dark:border-gray-800">
-        </div>
+        </div> -->
 
         <div class="overflow-auto rounded-lg shadow hidden md:block">
             <table class="w-full">
@@ -118,19 +118,19 @@
                     <th v-if="$page.props.permission.users.create">Actions</th>
                 </tr> -->
             </thead>
-            <tbody v-for="line in lines.data" :key="line.id" class="divide-y divide-gray-100">
+            <tbody v-for="line in lines" :key="line.id" class="divide-y divide-gray-100">
                 <tr class="bg-white dark:bg-gray-800">
-                    <td class="p-3 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{line.numero_facture}}</td>
-                    <td class="p-3 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{line.nom_fournisseur}}</td>
-                    <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{line.date_facturation}}</td>
-                    <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{line.date_echeance}}</td>
-                    <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{line.montant_HT}} Dhs</td>
-                    <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{line.montant_TTC}} Dhs</td>
+                    <td class="p-3 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{line.numero}}</td>
+                    <td class="p-3 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{line.nom_affiche_du_partenaire_de_la_facture}}</td>
+                    <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{line.date_de_facturation}}</td>
+                    <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{line.date_decheance}}</td>
+                    <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{line.montant_ht}} Dhs</td>
+                    <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{line.total}} Dhs</td>
                     <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">
-
+                        {{line.etat_du_paiement}} Dhs
                     </td>
                     <td>
-
+                        <button @click="saveFile()">Sauvegarder le fichier</button>
                     </td>
                 </tr>
             </tbody>
@@ -189,28 +189,32 @@ const hasErrors = computed(() => Object.keys(errors.value).length > 0)
                 form: {
                     excel_file:null
                 },
-                params:{
+                /* params:{
                     search: this.filters.search,
                     field: this.filters.field,
                     direction: this.filters.direction
-                },
+                }, */
             };
         },
         methods: {
-            sort(field){
+           /*  sort(field){
                 this.params.field = field;
                 this.params.direction = this.params.direction === 'asc' ? 'desc' : 'asc';
-            },
+            }, */
             submit() {
-                this.$inertia.post('/import_facture', this.form)
+                this.$inertia.post('/read_lines', this.form)
             },
 
-             destroy(id) {
+            saveFile(){
+                this.$inertia.post('/save_file')
+            }
+
+           /*   destroy(id) {
                  if(confirm('Voulez-vous vraiment supprimé cette facture?'))
                 this.$inertia.delete(route("facture.destroy", id));
-            },
+            }, */
         },
-        watch: {
+     /*    watch: {
             params: {
                 handler: throttle(function(){
                     let params = pickBy(this.params);
@@ -219,6 +223,6 @@ const hasErrors = computed(() => Object.keys(errors.value).length > 0)
                 },150),
                 deep:true,
             },
-        },
+        }, */
     })
 </script>

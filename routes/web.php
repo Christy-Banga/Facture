@@ -30,6 +30,11 @@ Route::middleware(['auth:sanctum','verified'])->post('/display_line',[FactureCon
 
 Route::middleware(['auth:sanctum','verified'])->get('/display_lines',[FactureController::class,'displayLine'])->name('display_lines');
 
+Route::middleware(['auth:sanctum','verified'])->post('/read_lines',[FactureController::class,'readLines'])->name('read_lines');
+
+Route::middleware(['auth:sanctum','verified'])->post('/save_file',[FactureController::class,'saveFile'])->name('save_file');
+
+
 
 Route::middleware(['auth:sanctum','verified'])->resource('/gestionnaire', UserController::class);
 
