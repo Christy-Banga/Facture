@@ -49,7 +49,7 @@
                                             </svg>
 
                                         <span :class="{'invisible': isLoading}">Ajouter</span>
-                                        </button>
+                                    </button>
                                 </div>
                             </div>
                         </form>

@@ -5,26 +5,40 @@
                 <h2 class="text-xl font-semibold leading-tight">
                     Liste des factures
                 </h2>
+
+                <div class="">
+                    <Link :href="route('display_lines')"
+                        class="p-3 w-16 h-16 bg-blue-600 rounded mx-14 hover:bg-blue-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
+                        <svg viewBox="0 0 20 20" enable-background="new 0 0 20 20" class="w-6 h-6 inline-block">
+                            <path fill="#FFFFFF" d="M16,10c0,0.553-0.048,1-0.601,1H11v4.399C11,15.951,10.553,16,10,16c-0.553,0-1-0.049-1-0.601V11H4.601
+                                C4.049,11,4,10.553,4,10c0-0.553,0.049-1,0.601-1H9V4.601C9,4.048,9.447,4,10,4c0.553,0,1,0.048,1,0.601V9h4.399
+                                C15.952,9,16,9.447,16,10z" />
+                        </svg>
+                    </Link>
+                </div>
             </div>
         </template>
 
-        <div v-if="hasErrors">
+       <!--  <div v-if="hasErrors">
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
             v-for="(error, key) in errors" :key="key">
                  {{ error }}
             </div>
-        </div>
+        </div> -->
 
-        <div v-if="$page.props.flash.success"  class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-            <span class="block sm:inline">{{ $page.props.flash.success }}</span>
-        </div>
+        <div class="py-2">
 
-        <div v-if="$page.props.flash.warning"  class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative" role="alert">
-            <span class="block sm:inline">{{ $page.props.flash.warning }}</span>
-        </div>
+            <div v-if="$page.props.flash.success"  class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline">{{ $page.props.flash.success }}</span>
+            </div>
 
-        <div v-if="$page.props.flash.danger" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
-            {{ $page.props.flash.danger }}
+            <div v-if="$page.props.flash.warning"  class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline">{{ $page.props.flash.warning }}</span>
+            </div>
+
+            <div v-if="$page.props.flash.danger" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+                {{ $page.props.flash.danger }}
+            </div>
         </div>
 
        <!--  <form @submit.prevent="submit" class="my-4" enctype="multipart/form-data">
@@ -149,7 +163,7 @@
         </table>
         </div>
 
-        <pagination class="mt-6" :links="factures.links"/>
+
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
             <div v-for="facture in factures.data" :key="facture.id" class="bg-white space-y-3 p-4 rounded-lg shadow dark:bg-gray-800" >
@@ -164,6 +178,8 @@
                 </div>
             </div>
         </div>
+
+         <pagination class="mt-6" :links="factures.links"/>
 
     </AuthenticatedLayout>
 </template>

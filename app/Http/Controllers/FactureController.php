@@ -42,12 +42,12 @@ class FactureController extends Controller
         }
 
         return Inertia::render('Facture/index',[
-            'factures' => $query->paginate(5),
+            'factures' => $query->paginate(6),
             'filters' => request()->all(['search','field','direction'])
         ]);
     }
 
-    public function import_facture(Request $request)
+  /*   public function import_facture(Request $request)
     {
         $request->validate([
             'excel_file' => 'required|mimes:xls,xlsx'
@@ -56,19 +56,15 @@ class FactureController extends Controller
         Excel::import(new FacturesImport, storage_path('app/temp/current.xlsx'));
 
         $lines = (new FacturesImport)->toArray(storage_path('app/temp/current.xlsx'));
-        /* dd($lines); */
 
-/*         return Redirect::route('facture.Line')->with('success', 'Facture importée avec succès');
- */
         return Inertia::render('Facture.Line',[
             'lines' => $lines
         ]);
- }
+ } */
 
 
     public function displayLine(Request $request)
     {
-
 
         $lines = collect();
 
@@ -79,7 +75,7 @@ class FactureController extends Controller
 
     public function readLines(Request $request)
     {
-          $request->validate([
+        $request->validate([
             'excel_file' => 'required|mimes:xls,xlsx'
         ]);
 
@@ -102,16 +98,21 @@ class FactureController extends Controller
         }
 
 
-        $lines = (new FacturesImport)->toArray($file_path);
+        $line = (new FacturesImport)->toArray($file_path);
+
+        foreach($line as $lines){
+            $lines;
+        }
 
         return Inertia::render('Facture/Line/index',[
-            'lines' => $lines[0]
+            'lines' => $lines
         ]);
 
     }
 
     public function saveFile(Request $request)
     {
+
         $request->session()->get('temp_file');
 
         $fileName = uniqid().'.'.pathinfo($request->session()->get('temp_file'), PATHINFO_EXTENSION);
@@ -120,7 +121,7 @@ class FactureController extends Controller
 
         File::move($request->session()->get('temp_file'), storage_path('app/public/'.$fileName));
 
-        return Redirect()->route('facture.index');
+        return Redirect()->route('facture.index')->with('success','La facture a été ajoutée !');
     }
 
     /**

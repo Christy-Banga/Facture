@@ -22,23 +22,19 @@ use ArielMejiaDev\LarapexCharts\Facades\LarapexChart;
 |
 */
 
-Route::middleware(['auth:sanctum','verified'])->resource('/facture',FactureController::class);
 
-Route::middleware(['auth:sanctum','verified'])->post('/import_facture',[FactureController::class,'import_facture'])->name('import_facture');
+Route::group(['middleware' => 'auth'],function(){
+    Route::resource('/facture',FactureController::class);
+    Route::post('/import_facture',[FactureController::class,'import_facture'])->name('import_facture');
+    Route::post('/display_line',[FactureController::class,'displayLine'])->name('display_line');
+    Route::get('/display_lines',[FactureController::class,'displayLine'])->name('display_lines');
+    Route::post('/read_lines',[FactureController::class,'readLines'])->name('read_lines');
+    Route::post('/save_file',[FactureController::class,'saveFile'])->name('save_file');
+    Route::resource('/gestionnaire', UserController::class);
+    Route::get('/',[FactureMoisController::class,'index'])->name('dashboard');
+});
 
-Route::middleware(['auth:sanctum','verified'])->post('/display_line',[FactureController::class,'displayLine'])->name('display_line');
 
-Route::middleware(['auth:sanctum','verified'])->get('/display_lines',[FactureController::class,'displayLine'])->name('display_lines');
-
-Route::middleware(['auth:sanctum','verified'])->post('/read_lines',[FactureController::class,'readLines'])->name('read_lines');
-
-Route::middleware(['auth:sanctum','verified'])->post('/save_file',[FactureController::class,'saveFile'])->name('save_file');
-
-
-
-Route::middleware(['auth:sanctum','verified'])->resource('/gestionnaire', UserController::class);
-
-Route::middleware(['auth:sanctum','verified'])->get('/',[FactureMoisController::class,'index'])->name('dashboard');
 
 
 
