@@ -33,92 +33,51 @@
             border border-solid border-gray-300 rounded transition ease-in-out dark:text-white
             m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             @input="form.excel_file = $event.target.files[0]" />
-            <button type="submit" class="bg-blue-500 rounded mx-7 my-3 px-2 p-1 text-white">Voir les lignes</button>
+            <button type="submit" class="bg-blue-600 rounded mx-14 hover:bg-blue-700 rounded mx-7 my-3 px-2 p-1 text-white">Voir les lignes</button>
         </form>
 
 
-
-       <!--  <div class="mb-4 max-w-xs">
-            <input type="search" v-model="params.search" aria-label="Search" placeholder="Que recherchez-vous?"
-            class="block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-800 dark:border-gray-800">
-        </div> -->
-
-        <div class="overflow-auto rounded-lg shadow hidden md:block">
+        <div class="overflow-auto rounded-lg shadow hidden md:block" v-if="lines.length > 0">
             <table class="w-full">
             <thead class="bg-gray-50 border-b-2 border-gray-200 dark:bg-gray-700 dark:border-gray-700">
-              <!--   <tr>
+                <tr>
                     <th class="p-3 text-sm font-semibold tracking-wide text-left">
-                        <span class="inline-flex w-full justify-between" @click="sort('numero_facture')">Numéro de facture
-                            <svg v-if="params.field === 'numero_facture' && params.direction === 'asc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z"/>
-                            </svg>
-                             <svg v-if="params.field === 'numero_facture' && params.direction === 'desc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"/>
-                            </svg>
+                        <span class="inline-flex w-full justify-between">Numéro de facture
+
                         </span>
                     </th>
                     <th class="p-3 text-sm font-semibold tracking-wide text-left">
-                        <span class="inline-flex w-full justify-between" @click="sort('nom_fournisseur')">Nom Fournisseur
-                            <svg v-if="params.field === 'nom_fournisseur' && params.direction === 'asc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z"/>
-                            </svg>
-                            <svg v-if="params.field === 'nom_fournisseur' && params.direction === 'desc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"/>
-                            </svg>
+                        <span class="inline-flex w-full justify-between">Nom Fournisseur
+
                         </span>
                     </th>
                     <th class="p-3 text-sm font-semibold tracking-wide text-left">
-                        <span class="inline-flex w-full justify-between" @click="sort('date_facturation')">Date Facturation
-                            <svg v-if="params.field === 'date_facturation' && params.direction === 'asc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z"/>
-                            </svg>
-                            <svg v-if="params.field === 'date_facturation' && params.direction === 'desc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"/>
-                            </svg>
+                        <span class="inline-flex w-full justify-between">Date Facturation
+
                         </span>
                     </th>
                     <th class="p-3 text-sm font-semibold tracking-wide text-left">
-                        <span class="inline-flex w-full justify-between" @click="sort('date_echeance')">Date d'écheance
-                            <svg v-if="params.field === 'date_echeance' && params.direction === 'asc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z"/>
-                            </svg>
-                            <svg v-if="params.field === 'date_echeance' && params.direction === 'desc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"/>
-                            </svg>
+                        <span class="inline-flex w-full justify-between">Date d'écheance
+
                         </span>
                     </th>
                     <th class="p-3 text-sm font-semibold tracking-wide text-left">
-                        <span class="inline-flex w-full justify-between" @click="sort('montant_HT')">Montant HT
-                            <svg v-if="params.field === 'montant_HT' && params.direction === 'asc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z"/>
-                            </svg>
-                            <svg v-if="params.field === 'montant_HT' && params.direction === 'desc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"/>
-                            </svg>
+                        <span class="inline-flex w-full justify-between">Montant HT
+
                         </span>
                     </th>
                     <th class="p-3 text-sm font-semibold tracking-wide text-left">
-                        <span class="inline-flex w-full justify-between" @click="sort('montant_TTC')">Montant TTC
-                            <svg v-if="params.field === 'montant_TTC' && params.direction === 'asc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z"/>
-                            </svg>
-                            <svg v-if="params.field === 'montant_TTC' && params.direction === 'desc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"/>
-                            </svg>
+                        <span class="inline-flex w-full justify-between">Montant TTC
+
                         </span>
                     </th>
                     <th class="p-3 text-sm font-semibold tracking-wide text-left">
-                        <span class="inline-flex w-full justify-between" @click="sort('etat_paiement')">Etat de paiement
-                            <svg v-if="params.field === 'etat_paiement' && params.direction === 'asc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z"/>
-                            </svg>
-                            <svg v-if="params.field === 'etat_paiement' && params.direction === 'desc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"/>
-                            </svg>
+                        <span class="inline-flex w-full justify-between">Etat de paiement
+
                         </span>
                     </th>
-                    <th v-if="$page.props.permission.users.create">Actions</th>
-                </tr> -->
+
+                </tr>
             </thead>
             <tbody v-for="line in lines" :key="line.id" class="divide-y divide-gray-100">
                 <tr class="bg-white dark:bg-gray-800">
@@ -133,9 +92,7 @@
                         <span v-else class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">{{line.etat_du_paiement}}</span>
 
                     </td>
-                    <!-- <td>
 
-                    </td> -->
                 </tr>
             </tbody>
         </table>
@@ -150,7 +107,7 @@
                     <div class="text-xs">{{line.numero}}</div>
                     <div class="text-xs">{{line.nom_affiche_du_partenaire_de_la_facture}}</div>
                     <div class="text-xs">{{line.date_de_facturation}}</div>
-                    <div class="text-xs">{{line.date_decheance}}</div>
+                    <div class="text-xs">{{moment(line.date_decheance).format('Y-m-d')}}</div>
                     <div class="text-xs">{{line.montant_ht}}</div>
                     <div class="text-xs">{{line.total}}</div>
                     <div class="text-xs">{{line.etat_du_paiement}}</div>
@@ -160,7 +117,7 @@
 
         <div class="py-4">
             <form @submit.prevent="saveFile">
-                <button type="saveFile" class="bg-blue-500 p-2 rounded text-white">
+                <button type="saveFile" class="bg-blue-600 rounded hover:bg-blue-700 p-2 rounded text-white">
                     Upload fichier
                 </button>
             </form>
@@ -186,6 +143,8 @@ const hasErrors = computed(() => Object.keys(errors.value).length > 0)
  import Pagination from '@/Components/Pagination.vue';
  import { pickBy, throttle } from 'lodash';
  import { Link } from '@inertiajs/inertia-vue3';
+ import moment from 'moment';
+
 
 
     export default defineComponent({

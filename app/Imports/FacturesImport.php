@@ -18,13 +18,13 @@ class FacturesImport implements ToModel,WithHeadingRow
     * @return \Illuminate\Database\Eloquent\Model|null
     */
     public function transformDate($value, $format = 'Y-m-d')
-{
-    try {
-        return \Carbon\Carbon::instance(Date::excelToDateTimeObject($value));
-    } catch (\ErrorException $e) {
-        return \Carbon\Carbon::createFromFormat($format, $value);
+    {
+        try {
+            return \Carbon\Carbon::instance(Date::excelToDateTimeObject($value));
+        } catch (\ErrorException $e) {
+            return \Carbon\Carbon::createFromFormat($format, $value);
+        }
     }
-}
     public function model(array $row)
     {
         return new Facture([

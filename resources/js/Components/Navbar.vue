@@ -105,7 +105,7 @@
                         method="post"
                         as="button"
                     >
-                        Log Out
+                        Se déconnecter
                     </BreezeDropdownLink>
                 </template>
             </BreezeDropdown>

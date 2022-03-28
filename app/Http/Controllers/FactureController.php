@@ -11,6 +11,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\StoreFactureRequest;
 use App\Http\Requests\UpdateFactureRequest;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 use App\Models\User;
 
 class FactureController extends Controller
@@ -80,7 +81,7 @@ class FactureController extends Controller
         ]);
 
 
-        $fileToUpload =  $request->file('excel_file');
+        $fileToUpload =  $request->excel_file;
         $extension = $fileToUpload->getClientOriginalExtension();
         $fileName = 'current.'.$extension;
         $file_path = storage_path('app/temp/'.$fileName);
@@ -103,6 +104,8 @@ class FactureController extends Controller
         foreach($line as $lines){
             $lines;
         }
+
+
 
         return Inertia::render('Facture/Line/index',[
             'lines' => $lines
