@@ -22,6 +22,7 @@ class CreateFacturesTable extends Migration
             $table->float('montant_HT');
             $table->float('montant_TTC');
             $table->string('etat_paiement');
+            $table->string('file');
             $table->timestamps();
         });
     }

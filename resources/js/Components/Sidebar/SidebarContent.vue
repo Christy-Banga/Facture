@@ -24,7 +24,7 @@
         </SidebarCollapsible>
 
         <!-- Examples -->
-        <!-- 
+        <!--
         => External link example
         <SidebarLink
             title="Github"

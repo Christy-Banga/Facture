@@ -13,6 +13,7 @@ use App\Http\Requests\StoreFactureRequest;
 use App\Http\Requests\UpdateFactureRequest;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 
 class FactureController extends Controller
 {
@@ -167,6 +168,11 @@ class FactureController extends Controller
      */
     public function edit($id)
     {
+        if(!Gate::allows('access-admin'))
+        {
+            abort(403);
+        }
+
         $facture = Facture::findOrFail($id);
 
         return Inertia::render('Facture/edit',compact('facture'));
@@ -196,6 +202,11 @@ class FactureController extends Controller
      */
     public function destroy($id)
     {
+        if(!Gate::allows('access-admin'))
+        {
+            abort(403);
+        }
+
         $user = Facture::findOrFail($id);
         $user->delete();
 

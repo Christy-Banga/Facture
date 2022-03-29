@@ -5,7 +5,10 @@
                 <h2 class="text-xl font-semibold leading-tight">
                     Voir tous les champs du fichiers
                 </h2>
+
+
             </div>
+
         </template>
 
         <div v-if="hasErrors">
@@ -26,6 +29,13 @@
         <div v-if="$page.props.flash.danger" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
             {{ $page.props.flash.danger }}
         </div> -->
+
+        <div class="py-4" v-if="lines.length === 0">
+                <Link :href="route('facture.index')"
+                        class="text-white p-2 bg-purple-600 hover:bg-purple-800 dark:bg-purple-700 dark:hover:bg-purple-800 px-3 py-2 rounded">
+                       Retour
+                </Link>
+            </div>
 
         <form @submit.prevent="submit" class="my-4" enctype="multipart/form-data">
             <input type="file" class="w-58 px-4 py-2 mt-2 form-control dark:bg-gray-800 px-3
@@ -101,6 +111,8 @@
 
         <!-- <pagination class="mt-6" :links="factures.links"/> -->
 
+
+
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
             <div v-for="line in lines" :key="line.id" class="bg-white space-y-3 p-4 rounded-lg shadow dark:bg-gray-800" >
                 <div class="flex items-center space-x-2 text-xs">
@@ -115,13 +127,22 @@
             </div>
         </div>
 
-        <div class="py-4">
-            <form @submit.prevent="saveFile">
-                <button type="saveFile" class="bg-blue-600 rounded hover:bg-blue-700 p-2 rounded text-white">
-                    Upload fichier
-                </button>
-            </form>
+        <div class="flex items-stretch py-4" v-if="lines.length > 0">
+            <div class="flex p-1">
+                <Link :href="route('display_lines')" type="submit" class="text-white p-2 bg-purple-600 hover:bg-purple-800 dark:bg-purple-700 dark:hover:bg-purple-800 px-3 py-2 float-right rounded">Clear</Link>
+            </div>
+
+            <div class="flex p-1">
+                <form @submit.prevent="saveFile">
+                    <button type="saveFile" class="bg-blue-600 rounded hover:bg-blue-700 p-2 rounded text-white">
+                        Upload fichier
+                    </button>
+                </form>
+            </div>
+
         </div>
+
+
 
     </AuthenticatedLayout>
 </template>

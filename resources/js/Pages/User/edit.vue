@@ -28,18 +28,18 @@
 
                             </div>
 
-                            <div class="mb-4">
+                            <!-- <div class="mb-4">
                                 <label class="text-xl text-gray-600">Role <span class="text-red-500">*</span></label>
                                 <input type="text" v-model="form.role" class="border-2 border-gray-300 p-2 w-full" id="role">
                                 <div class="bg-red-200 py-2 my-1 text-red-500" v-if="form.errors.role">{{ form.errors.role }}</div>
-                            </div>
+                            </div> -->
 
                             <div class="flex items-stretch">
                                 <div class="flex p-1">
                                     <Link :href="route('gestionnaire.index')" type="submit" class="text-white p-2 bg-purple-600 hover:bg-purple-800 dark:bg-purple-700 dark:hover:bg-purple-800 px-3 py-2 float-right rounded">Retour</Link>
                                 </div>
                                 <div class="flex p-1">
-                                    <button type="submit" class="text-white p-2 bg-blue-600 hover:bg-blue-800 dark:bg-gray-700 dark:hover:bg-gray-800 px-3 py-2 float-right rounded">Modifier</button>
+                                    <button type="submit" class="text-white p-2 bg-blue-600 rounded hover:bg-blue-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">Modifier</button>
                                 </div>
                             </div>
                         </form>
