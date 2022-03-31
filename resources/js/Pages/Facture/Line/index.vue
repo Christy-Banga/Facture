@@ -49,9 +49,9 @@
 
         <div class="overflow-auto rounded-lg shadow hidden md:block" v-if="lines.length > 0">
             <table class="w-full">
-            <thead class="bg-gray-50 border-b-2 border-gray-200 dark:bg-gray-700 dark:border-gray-700">
+            <thead class="bg-gray-50 border-b-2 border-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700">
                 <tr>
-                    <th class="p-3 text-sm font-semibold tracking-wide text-left">
+                    <th class="p-2 text-sm font-semibold tracking-wide text-left">
                         <span class="inline-flex w-full justify-between">Numéro de facture
 
                         </span>
@@ -91,14 +91,14 @@
             </thead>
             <tbody v-for="line in lines" :key="line.id" class="divide-y divide-gray-100">
                 <tr class="bg-white dark:bg-gray-800">
-                    <td class="p-3 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{line.numero}}</td>
-                    <td class="p-3 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{line.nom_affiche_du_partenaire_de_la_facture}}</td>
-                    <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{line.date_de_facturation}}</td>
-                    <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{line.date_decheance}}</td>
-                    <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{line.montant_ht}} Dhs</td>
-                    <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{line.total}} Dhs</td>
-                    <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">
-                        <span v-if="line.etat_du_paiement=== 'Non payées'" class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">{{line.etat_du_paiement}}</span>
+                    <td class="p-2 text-sm dark:text-gray-300 text-gray-700 whitespace-nowrap">{{line.numero}}</td>
+                    <td class="p-3 text-sm dark:text-gray-300 text-gray-700 whitespace-nowrap">{{line.nom_affiche_du_partenaire_de_la_facture}}</td>
+                    <td class="p-3 px-6 text-sm dark:text-gray-300 text-gray-700 whitespace-nowrap">{{line.date_de_facturation}}</td>
+                    <td class="p-3 px-6 text-sm dark:text-gray-300 text-gray-700 whitespace-nowrap">{{line.date_decheance}}</td>
+                    <td class="p-3 px-6 text-sm dark:text-gray-300 text-gray-700 whitespace-nowrap">{{line.montant_ht}} Dhs</td>
+                    <td class="p-3 px-6 text-sm dark:text-gray-300 text-gray-700 whitespace-nowrap">{{line.total}} Dhs</td>
+                    <td class="px-4 text-sm dark:text-white whitespace-nowrap">
+                        <span v-if="line.etat_du_paiement === 'Non payées'" class="px-2 py-1 font-semibold leading-tight text-red-400 rounded-sm">{{line.etat_du_paiement}}</span>
                         <span v-else class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">{{line.etat_du_paiement}}</span>
 
                     </td>
@@ -119,7 +119,7 @@
                     <div class="text-xs">{{line.numero}}</div>
                     <div class="text-xs">{{line.nom_affiche_du_partenaire_de_la_facture}}</div>
                     <div class="text-xs">{{line.date_de_facturation}}</div>
-                    <div class="text-xs">{{moment(line.date_decheance).format('Y-m-d')}}</div>
+                    <div class="text-xs">{{line.date_decheance}}</div>
                     <div class="text-xs">{{line.montant_ht}}</div>
                     <div class="text-xs">{{line.total}}</div>
                     <div class="text-xs">{{line.etat_du_paiement}}</div>

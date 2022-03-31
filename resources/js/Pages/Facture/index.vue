@@ -57,7 +57,7 @@
 
         <div class="overflow-auto rounded-lg shadow hidden md:block">
             <table class="w-full">
-            <thead class="bg-gray-50 border-b-2 border-gray-200 dark:bg-gray-700 dark:border-gray-700">
+            <thead class="bg-gray-50 border-b-2 border-gray-200 dark:bg-gray-700 dark:text-gray-400 dark:border-gray-700">
                 <tr>
                     <th class="p-2 text-sm font-semibold tracking-wide text-left">
                         <span class="inline-flex w-full justify-between" @click="sort('numero_facture')">Numéro de facture
@@ -134,14 +134,14 @@
             </thead>
             <tbody v-for="facture in factures.data" :key="facture.id" class="divide-y divide-gray-100">
                 <tr class="bg-white dark:bg-gray-800">
-                    <td class="p-2 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{facture.numero_facture}}</td>
-                    <td class="p-3 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{facture.nom_fournisseur}}</td>
-                    <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{facture.date_facturation}}</td>
-                    <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{facture.date_echeance}}</td>
-                    <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{facture.montant_HT}} Dhs</td>
-                    <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{facture.montant_TTC}} Dhs</td>
+                    <td class="p-2 text-sm dark:text-gray-300 text-gray-700 whitespace-nowrap">{{facture.numero_facture}}</td>
+                    <td class="p-3 text-sm dark:text-gray-300 text-gray-700 whitespace-nowrap">{{facture.nom_fournisseur}}</td>
+                    <td class="p-3 px-6 text-sm dark:text-gray-300 text-gray-700 whitespace-nowrap">{{facture.date_facturation}}</td>
+                    <td class="p-3 px-6 text-sm dark:text-gray-300 text-gray-700 whitespace-nowrap">{{facture.date_echeance}}</td>
+                    <td class="p-3 px-6 text-sm dark:text-gray-300 text-gray-700 whitespace-nowrap">{{facture.montant_HT}} Dhs</td>
+                    <td class="p-3 px-6 text-sm dark:text-gray-300 text-gray-700 whitespace-nowrap">{{facture.montant_TTC}} Dhs</td>
                     <td class="px-4 text-sm dark:text-white text-gray-700 whitespace-nowrap">
-                        <span v-if="facture.etat_paiement === 'Non payées'" class="px-2 py-1 font-semibold leading-tight text-red-700  rounded-sm">{{facture.etat_paiement}}</span>
+                        <span v-if="facture.etat_paiement === 'Non payées'" class="px-2 py-1 font-semibold leading-tight text-red-300 rounded-sm">{{facture.etat_paiement}}</span>
                         <span v-else class="px-4 py-1 font-semibold leading-tight text-green-700  rounded-sm">{{facture.etat_paiement}}</span>
                     </td>
                     <td v-if="$page.props.permission.users.create" class="py-3 px-6 text-center">

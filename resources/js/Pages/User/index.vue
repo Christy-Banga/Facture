@@ -48,7 +48,7 @@
 
                 <div class="overflow-auto rounded-lg shadow  md:block">
                     <table class="w-full">
-                        <thead class="bg-gray-50 border-b-2 border-gray-200 dark:bg-gray-700 dark:border-gray-700">
+                        <thead class="bg-gray-50 border-b-2 border-gray-200 dark:bg-gray-700 dark:text-gray-400 dark:border-gray-700">
                             <tr>
                                 <th class="p-3 text-sm font-semibold tracking-wide text-left">
                                     <span class="inline-flex w-full justify-between" @click="sort('name')">Name
@@ -85,9 +85,9 @@
                         </thead>
                         <tbody v-for="user in users.data" :key="user.id" class="divide-y divide-gray-100">
                             <tr class="bg-white dark:bg-gray-800">
-                                <td class="p-3 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{user.name}}</td>
-                                <td class="p-3 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{user.email}}</td>
-                                <td class="p-3 px-6 text-sm dark:text-white text-gray-700 whitespace-nowrap">{{user.role}}</td>
+                                <td class="p-3 text-sm dark:text-gray-300 text-gray-700 whitespace-nowrap">{{user.name}}</td>
+                                <td class="p-3 text-sm dark:text-gray-300 text-gray-700 whitespace-nowrap">{{user.email}}</td>
+                                <td class="p-3 px-6 text-sm dark:text-gray-300 text-gray-700 whitespace-nowrap">{{user.role}}</td>
                                 <td v-if="$page.props.permission.users.create" class="py-3 px-6 text-center">
                                     <div class="flex item-center justify-center" v-show="user.role != 'admin'">
                                         <Link v-if="user.can.update" :href="route('gestionnaire.edit', user.id)" class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110 text-purple-900">
