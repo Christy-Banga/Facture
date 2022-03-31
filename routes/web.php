@@ -25,8 +25,6 @@ use ArielMejiaDev\LarapexCharts\Facades\LarapexChart;
 
 Route::group(['middleware' => 'auth'],function(){
     Route::resource('/facture',FactureController::class);
-    Route::post('/import_facture',[FactureController::class,'import_facture'])->name('import_facture');
-    Route::post('/display_line',[FactureController::class,'displayLine'])->name('display_line');
     Route::get('/display_lines',[FactureController::class,'displayLine'])->name('display_lines');
     Route::post('/read_lines',[FactureController::class,'readLines'])->name('read_lines');
     Route::post('/save_file',[FactureController::class,'saveFile'])->name('save_file');

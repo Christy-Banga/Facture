@@ -49,22 +49,6 @@ class FactureController extends Controller
         ]);
     }
 
-  /*   public function import_facture(Request $request)
-    {
-        $request->validate([
-            'excel_file' => 'required|mimes:xls,xlsx'
-        ]);
-
-        Excel::import(new FacturesImport, storage_path('app/temp/current.xlsx'));
-
-        $lines = (new FacturesImport)->toArray(storage_path('app/temp/current.xlsx'));
-
-        return Inertia::render('Facture.Line',[
-            'lines' => $lines
-        ]);
- } */
-
-
     public function displayLine(Request $request)
     {
 
@@ -72,7 +56,7 @@ class FactureController extends Controller
 
         return Inertia::render('Facture/Line/index',[
             'lines' => $lines
-        ])->with('success', 'Facture importée avec succès');
+        ]);
     }
 
     public function readLines(Request $request)
