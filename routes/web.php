@@ -9,6 +9,7 @@ use Illuminate\Foundation\Application;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FactureController;
 use App\Http\Controllers\FactureMoisController;
+use App\Http\Controllers\NotificationController;
 use ArielMejiaDev\LarapexCharts\Facades\LarapexChart;
 
 /*
@@ -30,6 +31,13 @@ Route::group(['middleware' => 'auth'],function(){
     Route::post('/save_file',[FactureController::class,'saveFile'])->name('save_file');
     Route::resource('/gestionnaire', UserController::class);
     Route::get('/',[FactureMoisController::class,'index'])->name('dashboard');
+
+    //notification
+   /*  Route::get('/mark-one/{id}',[NotificationController::class,'store'])->name('notifications.store'); */
+   Route::get('/notifications',[NotificationController::class,'index'])->name('notifications');
+   Route::delete('/delete/{id}',[NotificationController::class,'destroy'])->name('destroy.notification');
+
+
 });
 
 

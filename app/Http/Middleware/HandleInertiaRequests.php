@@ -50,11 +50,15 @@ class HandleInertiaRequests extends Middleware
                     if($user){
                         return [
                             'viewAny' => $user->can('viewAny',User::class),
-                            'create' => $user->can('create',User::class)
+                            'create' => $user->can('create',User::class),
+                            'unreadNotifications' => $request->user()->unreadNotifications()->count(),
                         ];
-                    }  
+                    }
                 }
-            ]
+            ],
+
+
+
         ]);
     }
 }

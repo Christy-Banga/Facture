@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasCan;
+use App\Models\Facture;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
@@ -54,5 +55,10 @@ class User extends Authenticatable
 
     public function checkRole($role){
         return $this->role === $role;
+    }
+
+    public function factures()
+    {
+        return $this->hasMany(Facture::class);
     }
 }

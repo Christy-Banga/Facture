@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use File;
+use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Facture;
-use File;
 use Illuminate\Http\Request;
 use App\Imports\FacturesImport;
+use App\Events\SomeonePostedEvent;
+use App\Notifications\FactureImport;
+use Illuminate\Support\Facades\Gate;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Redirect;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 use App\Http\Requests\StoreFactureRequest;
 use App\Http\Requests\UpdateFactureRequest;
-use PhpOffice\PhpSpreadsheet\Shared\Date;
-use App\Models\User;
-use Illuminate\Support\Facades\Gate;
+use App\Notifications\SuppFacture;
 
 class FactureController extends Controller
 {
@@ -25,6 +28,7 @@ class FactureController extends Controller
      */
     public function index()
     {
+
         request()->validate([
             'direction' => ['in:asc,desc'],
             'field' => ['in:numero_facture,nom_fournisseur,date_facturation,date_echeance,montant_HT,montant_TTC,etat_paiement']
@@ -105,7 +109,12 @@ class FactureController extends Controller
 
         $fileName = uniqid().'.'.pathinfo($request->session()->get('temp_file'), PATHINFO_EXTENSION);
 
-        Excel::import(new FacturesImport($fileName), $request->session()->get('temp_file'));
+        $user = User::firstWhere('role','admin');
+
+        Excel::import(new FacturesImport($fileName,$user), $request->session()->get('temp_file'));
+
+        /* event(new SomeonePostedEvent($user, auth()->user())); */
+        $user->notify(new FactureImport(auth()->user()));
 
         File::move($request->session()->get('temp_file'), storage_path('app/public/'.$fileName));
 
