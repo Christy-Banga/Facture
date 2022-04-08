@@ -7,6 +7,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -34,7 +35,7 @@ class FactureImport extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database','broadcast'];
     }
 
     /**
@@ -63,9 +64,20 @@ class FactureImport extends Notification
             /* 'name' => $this->user->name,
             'NumFacture' => $this->factureNum->numero_facture */
             'info' => [
-                'message' => $this->user->name,
+                'name' => $this->user->name,
                 'sent' => Carbon::now()
             ]
         ];
+    }
+
+    public function toBroadcast($notifiable)
+    {
+        return new BroadcastMessage([
+
+            'info' => [
+                'name' => $this->user->name,
+                'sent' => Carbon::now()
+            ]
+        ]);
     }
 }

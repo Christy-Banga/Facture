@@ -75,7 +75,7 @@
             </Button>
 
             <Link :href="route('notifications')" class="pl-3" v-if="$page.props.permission.users.viewAny">
-                <span v-if="unreadNotifications > 0" class="text-white text-xs bg-red-600
+                <span id="js-count" v-if="unreadNotifications > 0" class="text-white text-xs bg-red-600
                         rounded-full px-2 py-1 absolute bottom-9 ml-2">
                         {{ unreadNotifications }}
                 </span>
@@ -87,57 +87,6 @@
 
 
             </Link>
-
-            <!-- <BreezeDropdown align="right" width="96">
-                <template #trigger>
-                    <span class="inline-flex rounded-md">
-                        <button
-                            type="button"
-                            class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md  hover:text-gray-700 focus:outline-none focus:ring focus:ring-purple-500 focus:ring-offset-1 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:bg-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bell-fill ml-4" viewBox="0 0 16 16">
-                                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
-                            </svg>
-
-                            <span v-if="unreadNotifications > 0" class="text-white text-xs bg-red-600
-                            rounded-full px-2 py-1 absolute bottom-5 left-10">
-                                {{ unreadNotifications }}
-                            </span>
-
-                            <svg
-                                class="ml-2 -mr-0.5 h-4 w-4"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                            >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                    clip-rule="evenodd"
-                                />
-                            </svg>
-                        </button>
-                    </span>
-                </template>
-                <template #content v-if="unreadNotifications > 0">
-                    <BreezeDropdownLink
-                        :href="notification.data.info.link" v-for="notification in notifications"
-                        :key="notification.id" @click="markOneAsRead(id)"
-                    >
-                        <span class="font-bold" >{{ notification.data.info.message }}</span> a ajouté une facture - {{ moment(notification.data.info.sent).fromNow()}}
-                    </BreezeDropdownLink>
-
-                </template>
-
-                <template #content v-else>
-                    <BreezeDropdownLink
-
-                    >
-                        Vous avez 0 notification
-                    </BreezeDropdownLink>
-
-                </template>
-            </BreezeDropdown> -->
 
             <!-- Dropdwon -->
             <BreezeDropdown align="right" width="48">
@@ -262,20 +211,28 @@ onUnmounted(() => {
 </script>
 
 <script>
-import moment from 'moment';
-var locale = moment.locale('fr');
+
 export default {
+
+      created(){
+        window.Echo.private(`App.Models.User.${this.$page.props.permission.users.id}`)
+            .notification((notification) => {
+            console.log(notification);
+            /* switch(notification.type) {
+                case 'App\\Notifications\\FactureImport':
+                    this.$page.props.permission.users.unreadNotificationsCount++
+                break;
+            } */
+
+        });
+    },
+
     data(){
         return {
             unreadNotifications: this.$page.props.permission.users.unreadNotifications,
         }
     },
-    methods:{
-        markOneAsRead(id){
-            axios.post(this.route('notifications.store',id))
-            /* this.$inertia.post('mark-one',id) */
 
-        }
-    }
+
 }
 </script>

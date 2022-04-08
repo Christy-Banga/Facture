@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Notifications\DatabaseNotification;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Notifications\DatabaseNotification;
 
 class NotificationController extends Controller
 {
@@ -15,6 +16,10 @@ class NotificationController extends Controller
      */
     public function index()
     {
+        if(!Gate::allows('access-admin'))
+        {
+            abort(403);
+        }
         auth()->user()->unreadNotifications->markAsRead();
         return Inertia::render('Notifications',[
             'notifications' => auth()->user()->notifications()->latest()->get()
@@ -87,6 +92,6 @@ class NotificationController extends Controller
     {
         $notification = auth()->user()->notifications->find($id);
         $notification->delete();
-        return back();
+        return back()->with('danger','La notification a bien été supprimé!');
     }
 }
