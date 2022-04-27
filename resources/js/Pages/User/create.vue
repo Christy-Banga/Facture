@@ -75,8 +75,8 @@ import { Link, useForm } from '@inertiajs/inertia-vue3'
     })
 
     const submit = () => {
-         isLoading.value = true;
-    setTimeout(() => isLoading.value = false,500);
+        isLoading.value = true;
+        setTimeout(() => isLoading.value = false,1000);
         form.post('/gestionnaire'), {
     }
 }

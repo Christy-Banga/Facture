@@ -38,12 +38,12 @@
             </div>
 
         <form @submit.prevent="submit" class="my-4" enctype="multipart/form-data">
-            <input type="file" class="w-58 px-4 py-2 mt-2 form-control dark:bg-gray-800 px-3
+            <input type="file" class="w-58 px-4 mt-2 form-control dark:bg-gray-800
             py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding dark:border-gray-800
             border border-solid border-gray-300 rounded transition ease-in-out dark:text-white
             m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             @input="form.excel_file = $event.target.files[0]" />
-            <button type="submit" class="bg-blue-600 rounded mx-14 hover:bg-blue-700 rounded mx-7 my-3 px-2 p-1 text-white">Voir les lignes</button>
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 rounded mx-7 my-3 px-2 p-1 text-white">Voir les lignes</button>
         </form>
 
 
@@ -52,22 +52,22 @@
             <thead class="bg-gray-50 border-b-2 border-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700">
                 <tr>
                     <th class="p-2 text-sm font-semibold tracking-wide text-left">
-                        <span class="inline-flex w-full justify-between">Numéro de facture
+                        <span class="inline-flex w-full justify-between">N°Facture
 
                         </span>
                     </th>
                     <th class="p-3 text-sm font-semibold tracking-wide text-left">
-                        <span class="inline-flex w-full justify-between">Nom Fournisseur
+                        <span class="inline-flex w-full justify-between">Fournisseur
 
                         </span>
                     </th>
                     <th class="p-3 text-sm font-semibold tracking-wide text-left">
-                        <span class="inline-flex w-full justify-between">Date Facturation
+                        <span class="inline-flex w-full justify-between">Date Début
 
                         </span>
                     </th>
                     <th class="p-3 text-sm font-semibold tracking-wide text-left">
-                        <span class="inline-flex w-full justify-between">Date d'écheance
+                        <span class="inline-flex w-full justify-between">Date Fin
 
                         </span>
                     </th>
@@ -134,8 +134,18 @@
 
             <div class="flex p-1">
                 <form @submit.prevent="saveFile">
-                    <button type="saveFile" class="bg-blue-600 rounded hover:bg-blue-700 p-2 rounded text-white">
-                        Upload fichier
+                    <button type="saveFile" class="bg-blue-600 hover:bg-blue-700 p-2 rounded text-white">
+                            <svg v-show="isLoading" class="w-5 h-5 text-white animate-spin absolute ml-4" fill="none"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75"
+                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                    fill="currentColor">
+                                </path>
+                            </svg>
+
+                            <span :class="{'invisible': isLoading}">Upload Fichier</span>
                     </button>
                 </form>
             </div>
@@ -160,6 +170,8 @@ const hasErrors = computed(() => Object.keys(errors.value).length > 0)
 </script>
 
 <script>
+import {ref} from 'vue';
+const isLoading = ref(false);
  import { defineComponent } from 'vue'
  import Pagination from '@/Components/Pagination.vue';
  import { pickBy, throttle } from 'lodash';
@@ -190,6 +202,8 @@ const hasErrors = computed(() => Object.keys(errors.value).length > 0)
             },
 
             saveFile(){
+                isLoading.value = true;
+                setTimeout(() => isLoading.value = false,2005);
                 this.$inertia.post('/save_file')
             }
         },

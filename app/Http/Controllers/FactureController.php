@@ -9,6 +9,8 @@ use App\Models\Facture;
 use Illuminate\Http\Request;
 use App\Imports\FacturesImport;
 use App\Events\SomeonePostedEvent;
+use App\Notifications\SuppFacture;
+use Illuminate\Support\Facades\DB;
 use App\Notifications\FactureImport;
 use Illuminate\Support\Facades\Gate;
 use Maatwebsite\Excel\Facades\Excel;
@@ -16,7 +18,6 @@ use Illuminate\Support\Facades\Redirect;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use App\Http\Requests\StoreFactureRequest;
 use App\Http\Requests\UpdateFactureRequest;
-use App\Notifications\SuppFacture;
 
 class FactureController extends Controller
 {
@@ -28,6 +29,9 @@ class FactureController extends Controller
      */
     public function index()
     {
+
+        $prixTotalFactureTTC =  DB::table('factures')->sum('montant_TTC');
+        $prixTotalFactureHT =  DB::table('factures')->sum('montant_HT');
 
         request()->validate([
             'direction' => ['in:asc,desc'],
@@ -49,7 +53,9 @@ class FactureController extends Controller
 
         return Inertia::render('Facture/index',[
             'factures' => $query->paginate(6),
-            'filters' => request()->all(['search','field','direction'])
+            'filters' => request()->all(['search','field','direction']),
+            'prixTotalFactureTTC' => $prixTotalFactureTTC,
+            'prixTotalFactureHT' => $prixTotalFactureHT
         ]);
     }
 
@@ -104,6 +110,7 @@ class FactureController extends Controller
 
     public function saveFile(Request $request)
     {
+        sleep(1);
 
         $request->session()->get('temp_file');
 
@@ -113,8 +120,8 @@ class FactureController extends Controller
 
         Excel::import(new FacturesImport($fileName,$user), $request->session()->get('temp_file'));
 
-        /* event(new SomeonePostedEvent($user, auth()->user())); */
-        $user->notify(new FactureImport(auth()->user()));
+        event(new SomeonePostedEvent($user, auth()->user()));
+        //$user->notify(new FactureImport(auth()->user()));
 
         File::move($request->session()->get('temp_file'), storage_path('app/public/'.$fileName));
 

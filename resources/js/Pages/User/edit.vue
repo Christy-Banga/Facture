@@ -30,7 +30,7 @@
 
                             <div class="mb-4">
                                 <label class="text-xl text-gray-600 dark:text-white">Password <span class="text-red-500">*</span></label>
-                                <input type="password" v-model="form.password" class="border-2 border-gray-300 p-2 w-full dark:border-gray-700 dark:bg-gray-900"  id="email">
+                                <input type="password" v-model="form.password" class="border-2 border-gray-300 p-2 w-full dark:border-gray-700 dark:bg-gray-900"  id="password">
                                 <div class="bg-red-200 py-2 my-1 text-red-500" v-if="form.errors.password">{{ form.errors.password }}</div>
 
                             </div>
