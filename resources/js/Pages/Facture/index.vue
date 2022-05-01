@@ -47,6 +47,8 @@
             class="block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-800 dark:border-gray-800">
         </div>
 
+        <Link :href="route('generatePDF')">Generate PDF</Link>
+
         <div class="overflow-auto rounded-lg shadow">
             <table class="w-full">
             <thead class="bg-gray-50 border-b-2 border-gray-200 dark:bg-gray-700 dark:text-gray-400 dark:border-gray-700">
@@ -128,8 +130,8 @@
                 <tr class="bg-white dark:bg-gray-800">
                     <td class="p-2 text-sm dark:text-gray-300 text-gray-700 whitespace-nowrap">{{facture.numero_facture}}</td>
                     <td class="p-2 text-sm dark:text-gray-300 text-gray-700 whitespace-nowrap">{{facture.nom_fournisseur}}</td>
-                    <td class="p-2 text-sm dark:text-gray-300 text-gray-700 whitespace-nowrap">{{facture.date_facturation}}</td>
-                    <td class="p-2 text-sm dark:text-gray-300 text-gray-700 whitespace-nowrap">{{facture.date_echeance}}</td>
+                    <td class="p-2 text-sm dark:text-gray-300 text-gray-700 whitespace-nowrap">{{moment(facture.date_facturation).format('MMMM YYYY')}}</td>
+                    <td class="p-2 text-sm dark:text-gray-300 text-gray-700 whitespace-nowrap">{{moment(facture.date_echeance).format('MMMM YYYY')}}</td>
                     <td class="p-2 px-4 text-sm dark:text-gray-300 text-gray-700 whitespace-nowrap">{{facture.montant_HT}} Dhs</td>
                     <td class="p-2 px-6 text-sm dark:text-gray-300 text-gray-700 whitespace-nowrap">{{facture.montant_TTC}} Dhs</td>
                  <!--    <td class="px-4 text-sm dark:text-white text-gray-700 whitespace-nowrap">
@@ -152,15 +154,18 @@
                     </td>
                 </tr>
             </tbody>
-            <tr>
-                <td></td>
-                <td class="text-2xl pl-5">Total</td>
-                <td></td>
-                <td></td>
-                <td class="text-lg pl-3">{{prixTotalFactureHT}} Dhs</td>
-                <td class="text-lg pl-5">{{ prixTotalFactureTTC }} Dhs</td>
-            </tr>
-        </table>
+                <tr>
+                    <td></td>
+                    <td class="text-2xl pl-5">Total</td>
+                    <td></td>
+                    <td></td>
+
+                    <td class="text-lg pl-3">{{prixTotalFactureHT}} Dhs</td>
+                  <!--   <td class="text-lg pl-3" v-else>{{prixTotalFactureHT}} Dhs</td> -->
+
+                    <td class="text-lg pl-5">{{ prixTotalFactureTTC }} Dhs</td>
+                </tr>
+            </table>
         </div>
 
 
@@ -202,6 +207,8 @@ const hasErrors = computed(() => Object.keys(errors.value).length > 0)
  import Pagination from '@/Components/Pagination.vue';
  import { pickBy, throttle } from 'lodash';
  import { Link } from '@inertiajs/inertia-vue3';
+ import moment from 'moment';
+ var locale = moment.locale('fr');
 
 
     export default defineComponent({
@@ -211,7 +218,7 @@ const hasErrors = computed(() => Object.keys(errors.value).length > 0)
             Link
         },
 
-        props:['factures','filters','prixTotalFactureTTC','prixTotalFactureHT'],
+        props:['factures','filters','prixTotalFactureTTC','prixTotalFactureHT',],
 
         data() {
             return {

@@ -33,9 +33,6 @@ class FactureMoisController extends Controller
         $years = $this->fetch_year();
 
 
-        /* $prixTotalFacture =  DB::table('factures')->sum('montant_TTC');
-        $prixMinFacture =  DB::table('factures')->min('montant_TTC');
-        $prixMaxFacture =  DB::table('factures')->max('montant_TTC'); */
         return Inertia::render('Dashboard',[
             'users' => User::count(),
             'Totalfacture' => $TotalFacture,

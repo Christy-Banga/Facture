@@ -30,7 +30,10 @@ Route::group(['middleware' => 'auth'],function(){
     Route::get('/display_lines',[FactureController::class,'displayLine'])->name('display_lines');
     Route::post('/read_lines',[FactureController::class,'readLines'])->name('read_lines');
     Route::post('/save_file',[FactureController::class,'saveFile'])->name('save_file');
+    Route::get('/generatePDF',[FactureController::class,'generatePDF'])->name('generatePDF');
+
     Route::resource('/gestionnaire', UserController::class);
+
     Route::get('/',[FactureMoisController::class,'index'])->name('dashboard');
 
     //notification
@@ -38,7 +41,6 @@ Route::group(['middleware' => 'auth'],function(){
    Route::get('/notifications',[NotificationController::class,'index'])->name('notifications');
    Route::delete('/delete/{id}',[NotificationController::class,'destroy'])->name('destroy.notification');
    Route::get('/incoherence',[IncoherenceController::class,'index'])->name('incoherence');
-   /* Route::post('/incoherence',[IncoherenceController::class,'store'])->name('incoherence.store'); */
 
 });
 

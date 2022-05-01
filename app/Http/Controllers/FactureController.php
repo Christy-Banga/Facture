@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use File;
 use App\Models\User;
 use Inertia\Inertia;
@@ -11,6 +12,7 @@ use App\Imports\FacturesImport;
 use App\Events\SomeonePostedEvent;
 use App\Notifications\SuppFacture;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
 use App\Notifications\FactureImport;
 use Illuminate\Support\Facades\Gate;
 use Maatwebsite\Excel\Facades\Excel;
@@ -27,11 +29,8 @@ class FactureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
-        $prixTotalFactureTTC =  DB::table('factures')->sum('montant_TTC');
-        $prixTotalFactureHT =  DB::table('factures')->sum('montant_HT');
 
         request()->validate([
             'direction' => ['in:asc,desc'],
@@ -51,11 +50,17 @@ class FactureController extends Controller
             $query->orderBy(request('field'), request('direction'));
         }
 
+        $data = (clone $query)->get();
+
+        $prixTotalFactureTTC =  $data->sum('montant_TTC');
+        $prixTotalFactureHT =  $data->sum('montant_HT');
+
+
         return Inertia::render('Facture/index',[
-            'factures' => $query->paginate(6),
+            'factures' => $query->paginate(7),
             'filters' => request()->all(['search','field','direction']),
             'prixTotalFactureTTC' => $prixTotalFactureTTC,
-            'prixTotalFactureHT' => $prixTotalFactureHT
+            'prixTotalFactureHT' => $prixTotalFactureHT,
         ]);
     }
 
@@ -126,6 +131,15 @@ class FactureController extends Controller
         File::move($request->session()->get('temp_file'), storage_path('app/public/'.$fileName));
 
         return Redirect()->route('facture.index')->with('success','La facture a été ajoutée !');
+    }
+
+    public function generatePDF()
+    {
+        $factureExports = Facture::all();
+        $prixTotalFactureTTC =  DB::table('factures')->sum('montant_TTC');
+        $prixTotalFactureHT =  DB::table('factures')->sum('montant_HT');
+        $pdf = PDF::loadView('pdf',compact('factureExports','prixTotalFactureTTC','prixTotalFactureHT'));
+        return $pdf->stream('pdf.pdf');
     }
 
     /**

@@ -18,8 +18,8 @@ class CreateFacturesTable extends Migration
             $table->id();
             $table->string('numero_facture');
             $table->string('nom_fournisseur');
-            $table->date('date_facturation')->format('d-m-Y');
-            $table->date('date_echeance')->format('d-m-Y');
+            $table->date('date_facturation');
+            $table->date('date_echeance');
             $table->float('montant_HT');
             $table->float('montant_TTC');
             $table->string('etat_paiement');

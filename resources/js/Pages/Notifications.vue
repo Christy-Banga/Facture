@@ -17,7 +17,7 @@
 
         <div class="container mx-auto px-6 py-0" v-for="notification in notifications" :key="notification.id">
             <div class="mt-4">
-                <div class="flex flex-wrap -mx-6 flex p-4 border-b border-gray-200">
+                <div class="flex flex-wrap -mx-6 p-4 border-b border-gray-200">
 
                   <span class="font-bold" >{{ notification.data.info.name }}</span> <span class="ml-1">a ajouté une facture</span> -
                   {{ moment(notification.data.info.sent).fromNow()}}

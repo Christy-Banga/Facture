@@ -17,7 +17,7 @@ class MonthlyFactureChart
 
     public function build($year=null): array
     {
-        $nombreFactureMois = Facture::select(DB::raw("COUNT(*) as count"))
+        $nombreFactureMois = Facture::select(DB::raw("COUNT(*) as count, Month(created_at) as mois"))
                     ->when(is_null($year),function($q){
                         $q->whereYear('created_at', date('Y'));
                     })
@@ -26,27 +26,20 @@ class MonthlyFactureChart
                         $q->whereYear('created_at', $year);
                     })
                     ->groupBy(DB::raw("Month(created_at)"))
-                    ->pluck('count');
+                    ->orderBy(DB::raw("Month(created_at)"))
+                    ->pluck('count','mois');
 
-                    $months = Facture::select(DB::raw("Month(created_at) as month"))
-                    ->when(is_null($year),function($q){
-                        $q->whereYear('created_at', date('Y'));
-                    })
 
-                    ->when(!is_null($year),function($q) use($year){
-                        $q->whereYear('created_at', $year);
-                    })
-
-                    ->groupBy(DB::raw("Month(created_at)"))
-                    ->pluck('month');
-
-        foreach($months as $index => $month){
-                $datas[] = $nombreFactureMois[$index];
-            }
         for($i=0; $i<12; $i++){
-            if(empty($datas[$i]))
-            $datas[$i] = 0;
+            if(isset($nombreFactureMois[$i+1]))
+            $datas[$i] = $nombreFactureMois[$i+1];
+            else{
+                $datas[$i] = 0;
+            }
         }
+
+
+
 
         return $this->chart->barChart()
             ->setTitle('Nombre total de factures par mois')
