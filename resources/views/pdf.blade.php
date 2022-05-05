@@ -1,3 +1,7 @@
+@php
+    Carbon\Carbon::setlocale(config('app.locale'));
+@endphp
+
  <!DOCTYPE html>
  <html>
  <head>
@@ -50,14 +54,14 @@
      <th>Montant HT</th>
      <th>Montant TTC</th>
    </tr>
-   @foreach ($factureExports as $factureExport)
+   @foreach ($data as $datas)
     <tr>
-        <td>{{ $factureExport->numero_facture }}</td>
-        <td>{{ $factureExport->nom_fournisseur }}</td>
-        <td>{{ $factureExport->date_facturation }}</td>
-        <td>{{ $factureExport->date_echeance }}</td>
-        <td>{{ $factureExport->montant_HT }}</td>
-        <td>{{ $factureExport->montant_TTC }}</td>
+        <td>{{ $datas->numero_facture }}</td>
+        <td>{{ $datas->nom_fournisseur }}</td>
+        <td>{{ Carbon\Carbon::parse($datas->date_facturation)->format('M Y') }}</td>
+        <td>{{ Carbon\Carbon::parse($datas->date_echeance)->format('M Y') }}</td>
+        <td>{{ $datas->montant_HT }}</td>
+        <td>{{ $datas->montant_TTC }}</td>
     </tr>
    @endforeach
    <tr class="oo">

@@ -30,7 +30,6 @@ Route::group(['middleware' => 'auth'],function(){
     Route::get('/display_lines',[FactureController::class,'displayLine'])->name('display_lines');
     Route::post('/read_lines',[FactureController::class,'readLines'])->name('read_lines');
     Route::post('/save_file',[FactureController::class,'saveFile'])->name('save_file');
-    Route::get('/generatePDF',[FactureController::class,'generatePDF'])->name('generatePDF');
 
     Route::resource('/gestionnaire', UserController::class);
 

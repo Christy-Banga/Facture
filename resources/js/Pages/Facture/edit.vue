@@ -9,14 +9,14 @@
         </template>
 
         <!-- component -->
-       
+
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-800">
                     <form @submit.prevent="submit">
                         <div class="mb-4">
                             <label for="numero_facture" class="text-xl text-gray-600 dark:text-white">Numéro de facture <span class="text-red-500">*</span></label>
-                            <input type="text" v-model="form.numero_facture" disabled class="border-2 border-gray-300 p-2 w-full dark:border-gray-700 dark:bg-gray-900" id="numero_facture">
+                            <input type="text" v-model="form.numero_facture" class="border-2 border-gray-300 p-2 w-full dark:border-gray-700 dark:bg-gray-900" id="numero_facture">
                             <div class="bg-red-200 py-2 my-1 text-red-500" v-if="form.errors.numero_facture">{{ form.errors.numero_facture }}</div>
                         </div>
 

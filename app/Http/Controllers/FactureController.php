@@ -29,7 +29,7 @@ class FactureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
 
         request()->validate([
@@ -44,16 +44,33 @@ class FactureController extends Controller
                   ->orWhere('nom_fournisseur','LIKE','%'.request('search').'%')
                   ->orWhere('date_facturation','LIKE','%'.request('search').'%')
                   ->orWhere('date_echeance','LIKE','%'.request('search').'%');
+
+
         }
 
         if(request()->has(['field','direction'])){
             $query->orderBy(request('field'), request('direction'));
         }
 
+
+
         $data = (clone $query)->get();
 
         $prixTotalFactureTTC =  $data->sum('montant_TTC');
         $prixTotalFactureHT =  $data->sum('montant_HT');
+
+        if(request()->has('exportPDF')) {
+            $pdf = PDF::loadView('pdf',compact('data','prixTotalFactureHT','prixTotalFactureTTC'));
+            return $pdf->download('fact.pdf');
+        }
+
+
+
+       /*  $factureExports = Facture::all(); */
+
+        /* $pdf = PDF::loadView('pdf',compact('factureExports','prixTotalFactureHT','prixTotalFactureTTC'));
+        return $pdf->download('fact.pdf'); */
+
 
 
         return Inertia::render('Facture/index',[
@@ -133,13 +150,20 @@ class FactureController extends Controller
         return Redirect()->route('facture.index')->with('success','La facture a été ajoutée !');
     }
 
-    public function generatePDF()
+ /*    public function generatePDF()
     {
         $factureExports = Facture::all();
         $prixTotalFactureTTC =  DB::table('factures')->sum('montant_TTC');
         $prixTotalFactureHT =  DB::table('factures')->sum('montant_HT');
-        $pdf = PDF::loadView('pdf',compact('factureExports','prixTotalFactureTTC','prixTotalFactureHT'));
-        return $pdf->stream('pdf.pdf');
+        $pdf = PDF::loadView('pdf',compact('factureExports','prixTotalFactureHT','prixTotalFactureTTC'));
+
+        return $pdf->download('fact.pdf');
+
+    } */
+
+    public function voir()
+    {
+        return Inertia::render('voir');
     }
 
     /**

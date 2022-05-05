@@ -19,12 +19,6 @@
             </div>
         </template>
 
-       <!--  <div v-if="hasErrors">
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
-            v-for="(error, key) in errors" :key="key">
-                 {{ error }}
-            </div>
-        </div> -->
 
         <div class="py-2">
 
@@ -42,12 +36,25 @@
         </div>
 
 
-        <div class="mb-4 max-w-xs">
-            <input type="search" v-model="params.search" aria-label="Search" placeholder="Que recherchez-vous?"
-            class="block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-800 dark:border-gray-800">
+
+        <div class="flex justify-start">
+            <div class="mb-4 max-w-xs">
+                <input type="search" v-model="params.search" aria-label="Search" placeholder="Que recherchez-vous?"
+                    class="block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-800 dark:border-gray-800">
+            </div>
+
+            <form @click="exportPDF" class="pt-2 mx-3">
+                <button type="submit" class="btn btn-secondary btn-sm" name="exportPDF">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a2 2 0 002 2h6a2 2 0 002-2v-2h1a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H7a2 2 0 00-2 2zm8 0H7v3h6V4zm0 8H7v4h6v-4z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </form>
         </div>
 
-        <Link :href="route('generatePDF')">Generate PDF</Link>
+
+
+
 
         <div class="overflow-auto rounded-lg shadow">
             <table class="w-full">
@@ -161,7 +168,6 @@
                     <td></td>
 
                     <td class="text-lg pl-3">{{prixTotalFactureHT}} Dhs</td>
-                  <!--   <td class="text-lg pl-3" v-else>{{prixTotalFactureHT}} Dhs</td> -->
 
                     <td class="text-lg pl-5">{{ prixTotalFactureTTC }} Dhs</td>
                 </tr>
@@ -228,7 +234,8 @@ const hasErrors = computed(() => Object.keys(errors.value).length > 0)
                 params:{
                     search: this.filters.search,
                     field: this.filters.field,
-                    direction: this.filters.direction
+                    direction: this.filters.direction,
+                    test: this.filters.test
                 },
             };
         },
@@ -245,6 +252,11 @@ const hasErrors = computed(() => Object.keys(errors.value).length > 0)
                  if(confirm('Voulez-vous vraiment supprimé cette facture?'))
                 this.$inertia.delete(route("facture.destroy", id));
             },
+
+            generatePDF(){
+                this.$inertia.get(route('generatePDF'));
+            }
+
         },
         watch: {
             params: {
