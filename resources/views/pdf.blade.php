@@ -1,8 +1,4 @@
-@php
-    Carbon\Carbon::setlocale(config('app.locale'));
-@endphp
-
- <!DOCTYPE html>
+<!DOCTYPE html>
  <html>
  <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -12,17 +8,21 @@
         table {
         font-family: arial, sans-serif;
         border-collapse: collapse;
-        width: 105%;
+        width: 106%;
         }
 
         td, th {
         border: 1px solid #dddddd;
-        text-align: left;
+        text-align: center;
         padding: 8px;
         }
 
         tr:nth-child(even) {
         background-color: #dddddd;
+        }
+
+        h4{
+            text-align: center;
         }
 
         .prixText{
@@ -43,7 +43,10 @@
  </head>
  <body>
 
- <h2>Situation liaisons spécialisés Mois </h2>
+ <h4>Situation liaisons spécialisés Mois
+     {{ Carbon\Carbon::parse($dateFacturation->date_facturation)->format('M Y') }} à
+     {{ Carbon\Carbon::parse($dateEcheance->date_echeance)->format('M Y') }}
+ </h4>
 
  <table>
    <tr>
@@ -54,14 +57,14 @@
      <th>Montant HT</th>
      <th>Montant TTC</th>
    </tr>
-   @foreach ($data as $datas)
+   @foreach ($datas as $data)
     <tr>
-        <td>{{ $datas->numero_facture }}</td>
-        <td>{{ $datas->nom_fournisseur }}</td>
-        <td>{{ Carbon\Carbon::parse($datas->date_facturation)->format('M Y') }}</td>
-        <td>{{ Carbon\Carbon::parse($datas->date_echeance)->format('M Y') }}</td>
-        <td>{{ $datas->montant_HT }}</td>
-        <td>{{ $datas->montant_TTC }}</td>
+        <td>{{ $data->numero_facture }}</td>
+        <td>{{ $data->nom_fournisseur }}</td>
+        <td>{{ Carbon\Carbon::parse($data->date_facturation)->format('M Y') }}</td>
+        <td>{{ Carbon\Carbon::parse($data->date_echeance)->format('M Y') }}</td>
+        <td>{{ $data->montant_HT }}</td>
+        <td>{{ $data->montant_TTC }}</td>
     </tr>
    @endforeach
    <tr class="oo">

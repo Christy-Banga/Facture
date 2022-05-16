@@ -29,7 +29,7 @@ class FactureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
         request()->validate([
@@ -44,8 +44,6 @@ class FactureController extends Controller
                   ->orWhere('nom_fournisseur','LIKE','%'.request('search').'%')
                   ->orWhere('date_facturation','LIKE','%'.request('search').'%')
                   ->orWhere('date_echeance','LIKE','%'.request('search').'%');
-
-
         }
 
         if(request()->has(['field','direction'])){
@@ -53,28 +51,40 @@ class FactureController extends Controller
         }
 
 
+        $datas = $query->paginate(7);
 
-        $data = (clone $query)->get();
+        /* $data = (clone $query)->paginate(7); */
 
-        $prixTotalFactureTTC =  $data->sum('montant_TTC');
-        $prixTotalFactureHT =  $data->sum('montant_HT');
+        $dateFacturation = Facture::get('date_facturation')->first();
+        $dateEcheance = Facture::get('date_echeance')->first();
+        $prixTotalFactureTTC =  $datas->sum('montant_TTC');
+        $prixTotalFactureHT =  $datas->sum('montant_HT');
 
-        if(request()->has('exportPDF')) {
-            $pdf = PDF::loadView('pdf',compact('data','prixTotalFactureHT','prixTotalFactureTTC'));
+
+        if($request->has('exportPDF')){
+            $pdf = PDF::loadView('pdf',[
+                'dateFacturation' => $dateFacturation,
+                'dateEcheance' => $dateEcheance,
+                'datas' => $datas,
+                'prixTotalFactureHT' => $prixTotalFactureHT,
+                'prixTotalFactureTTC' => $prixTotalFactureTTC,
+                ]);
+            return $pdf->stream();
+
+        }if($request->has('print')){
+            $pdf = PDF::loadView('pdf',[
+                'dateFacturation' => $dateFacturation,
+                'dateEcheance' => $dateEcheance,
+                'datas' => $datas,
+                'prixTotalFactureHT' => $prixTotalFactureHT,
+                'prixTotalFactureTTC' => $prixTotalFactureTTC,
+                ]);
             return $pdf->download('fact.pdf');
         }
 
 
-
-       /*  $factureExports = Facture::all(); */
-
-        /* $pdf = PDF::loadView('pdf',compact('factureExports','prixTotalFactureHT','prixTotalFactureTTC'));
-        return $pdf->download('fact.pdf'); */
-
-
-
         return Inertia::render('Facture/index',[
-            'factures' => $query->paginate(7),
+            'factures' => $datas,
             'filters' => request()->all(['search','field','direction']),
             'prixTotalFactureTTC' => $prixTotalFactureTTC,
             'prixTotalFactureHT' => $prixTotalFactureHT,
@@ -123,7 +133,6 @@ class FactureController extends Controller
         }
 
 
-
         return Inertia::render('Facture/Line/index',[
             'lines' => $lines
         ]);
@@ -150,21 +159,56 @@ class FactureController extends Controller
         return Redirect()->route('facture.index')->with('success','La facture a été ajoutée !');
     }
 
- /*    public function generatePDF()
+  /*   public function report(Request $request)
     {
-        $factureExports = Facture::all();
-        $prixTotalFactureTTC =  DB::table('factures')->sum('montant_TTC');
-        $prixTotalFactureHT =  DB::table('factures')->sum('montant_HT');
-        $pdf = PDF::loadView('pdf',compact('factureExports','prixTotalFactureHT','prixTotalFactureTTC'));
+        request()->validate([
+            'direction' => ['in:asc,desc'],
+            'field' => ['in:numero_facture,nom_fournisseur,date_facturation,date_echeance,montant_HT,montant_TTC,etat_paiement']
+        ]);
 
-        return $pdf->download('fact.pdf');
+        $query = Facture::query();
 
+        if(request('search')) {
+            $query->where('numero_facture','LIKE','%'.request('search').'%')
+                  ->orWhere('nom_fournisseur','LIKE','%'.request('search').'%')
+                  ->orWhere('date_facturation','LIKE','%'.request('search').'%')
+                  ->orWhere('date_echeance','LIKE','%'.request('search').'%');
+        }
+
+        if(request()->has(['field','direction'])){
+            $query->orderBy(request('field'), request('direction'));
+        }
+
+
+        $datas = $query->paginate(7);
+
+
+        $data = (clone $query)->paginate(7);
+
+
+        $dateFacturation = Facture::get('date_facturation')->first();
+        $dateEcheance = Facture::get('date_echeance')->first();
+        $prixTotalFactureHT =  $datas->sum('montant_HT');
+        $prixTotalFactureTTC =  $datas->sum('montant_TTC');
+
+
+        $pdf = PDF::loadView('pdf',[
+            'dateFacturation' => $dateFacturation,
+            'dateEcheance' => $dateEcheance,
+            'datas' => $datas,
+            'prixTotalFactureHT' => $prixTotalFactureHT,
+            'prixTotalFactureTTC' => $prixTotalFactureTTC
+        ]);
+
+        return $pdf->stream();
+
+        return Inertia::render('Facture/index',[
+            'factures' => $datas,
+            'filters' => request()->all(['search','field','direction']),
+            'prixTotalFactureTTC' => $prixTotalFactureTTC,
+            'prixTotalFactureHT' => $prixTotalFactureHT,
+        ]);
     } */
-
-    public function voir()
-    {
-        return Inertia::render('voir');
-    }
 
     /**
      * Show the form for creating a new resource.

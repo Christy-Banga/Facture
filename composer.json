@@ -7,7 +7,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "arielmejiadev/larapex-charts": "^3.0",
-        "barryvdh/laravel-dompdf": "^1.0",
+        "carlos-meneses/laravel-mpdf": "^2.1",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "inertiajs/inertia-laravel": "^0.4.3",
@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.5",
         "maatwebsite/excel": "^3.1",
         "pusher/pusher-php-server": "^7.0",
+        "thujohn/pdf": "^1.0",
         "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
