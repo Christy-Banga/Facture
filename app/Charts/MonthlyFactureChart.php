@@ -39,8 +39,6 @@ class MonthlyFactureChart
         }
 
 
-
-
         return $this->chart->barChart()
             ->setTitle('Nombre total de factures par mois')
             ->addData('Nombre', ($datas))

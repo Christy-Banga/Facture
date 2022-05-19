@@ -35,7 +35,9 @@
                         class="text-white p-2 bg-purple-600 hover:bg-purple-800 dark:bg-purple-700 dark:hover:bg-purple-800 px-3 py-2 rounded">
                        Retour
                 </Link>
-            </div>
+        </div>
+
+
 
         <form @submit.prevent="submit" class="my-4" enctype="multipart/form-data">
             <input type="file" class="w-58 px-4 mt-2 form-control dark:bg-gray-800
@@ -127,10 +129,19 @@
             </div>
         </div>
 
+
         <div class="flex items-stretch py-4" v-if="lines.length > 0">
+            <div class="p-1 block">
+                <label for="tags">Sélectionnez une catégorie:</label>
+                <select class="border-2 border-gray-300 rounded p-2 mx-2 dark:bg-gray-800 dark:border-gray-800" v-model="form.tag_id">
+                    <option v-for="tag in tags" v-bind:key="tag.id" :value="tag.id">{{tag.name}}</option>
+                </select>
+            </div>
             <div class="flex p-1">
                 <Link :href="route('display_lines')" type="submit" class="text-white p-2 bg-purple-600 hover:bg-purple-800 dark:bg-purple-700 dark:hover:bg-purple-800 px-3 py-2 float-right rounded">Clear</Link>
             </div>
+
+
 
             <div class="flex p-1">
                 <form @submit.prevent="saveFile">
@@ -187,12 +198,13 @@ const isLoading = ref(false);
             Link
         },
 
-        props:['lines'],
+        props:['lines','tags'],
 
         data() {
             return {
                 form: {
-                    excel_file:null
+                    excel_file:null,
+                    tag_id: '',
                 },
             };
         },
@@ -204,7 +216,7 @@ const isLoading = ref(false);
             saveFile(){
                 isLoading.value = true;
                 setTimeout(() => isLoading.value = false,2005);
-                this.$inertia.post('/save_file')
+                this.$inertia.post('/save_file',this.form)
             }
         },
 

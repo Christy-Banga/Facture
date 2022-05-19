@@ -35,6 +35,17 @@
             </div>
         </div>
 
+       <!--  <div class="p-1 block">
+                <label for="tags">Sélectionnez une catégorie:</label>
+                <select class="border-2 border-gray-300 rounded p-2 mx-2 dark:bg-gray-800 dark:border-gray-800" v-model="selectedCat" @change='selectedCat()'>
+                    <option v-for="tag in tags" v-bind:key="tag.id" :value="tag.id">{{tag.name}}</option>
+                </select>
+            </div> -->
+
+            <div v-for="tag in tags" :key="tag.id">
+                <Link :href="route('facture.index',{'categorie' : tag.name})">{{ tag.name  }}</Link>
+            </div>
+
 
         <div class="flex justify-start">
             <div class="mb-4 max-w-xs">
@@ -230,7 +241,7 @@ const hasErrors = computed(() => Object.keys(errors.value).length > 0)
             Link
         },
 
-        props:['factures','filters','prixTotalFactureTTC','prixTotalFactureHT',],
+        props:['factures','filters','prixTotalFactureTTC','prixTotalFactureHT','tags'],
 
         data() {
             return {
@@ -241,7 +252,6 @@ const hasErrors = computed(() => Object.keys(errors.value).length > 0)
                     search: this.filters.search,
                     field: this.filters.field,
                     direction: this.filters.direction,
-                    test: this.filters.test
                 },
             };
         },
@@ -261,7 +271,11 @@ const hasErrors = computed(() => Object.keys(errors.value).length > 0)
 
           submit: function(){
             this.$refs.form.submit()
-      },
+            },
+
+            changeCat(){
+            this.$inertia.get('/', { cat: this.selectedCat }, { replace: true })
+        }
 
         },
         watch: {

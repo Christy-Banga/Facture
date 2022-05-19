@@ -36,13 +36,15 @@ class FacturesImport implements ToModel,WithHeadingRow
             'montant_TTC' => $row['total'],
             'etat_paiement' => $row['etat_du_paiement'],
             'file' => $this->fileName,
-            'user_id' => $this->user
+            'user_id' => $this->user,
+            'tag_id' => $this->tag_id
         ]);
     }
 
-    public function __construct($fileName = null, $user = null)
+    public function __construct($fileName = null, $user = null, $tag_id = null)
     {
         $this->fileName = $fileName;
         $this->user = $user;
+        $this->tag_id = $tag_id;
     }
 }

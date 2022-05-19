@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -20,7 +21,8 @@ class Facture extends Model
         'montant_TTC',
         'etat_paiement',
         'file',
-        'user_id'
+        'user_id',
+        'tag_id'
     ];
 
     public static function boot()
@@ -29,11 +31,18 @@ class Facture extends Model
 
         self::creating(function($facture){
             $facture->user()->associate(auth()->user()->id);
+          /*   $facture->tag()->associate(request()->tag);
+            dd($facture); */
         });
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function tag()
+    {
+        return $this->belongsTo(Tag::class);
     }
 }

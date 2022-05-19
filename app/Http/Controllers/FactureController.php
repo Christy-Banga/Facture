@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Redirect;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use App\Http\Requests\StoreFactureRequest;
 use App\Http\Requests\UpdateFactureRequest;
+use App\Models\Tag;
+use PhpOffice\PhpSpreadsheet\Calculation\Category;
 
 class FactureController extends Controller
 {
@@ -39,6 +41,9 @@ class FactureController extends Controller
 
         $query = Facture::query();
 
+        $datas = (clone $query)->with('tag')->paginate(7);
+
+        //requete de recherche
         if(request('search')) {
             $query->where('numero_facture','LIKE','%'.request('search').'%')
                   ->orWhere('nom_fournisseur','LIKE','%'.request('search').'%')
@@ -46,12 +51,21 @@ class FactureController extends Controller
                   ->orWhere('date_echeance','LIKE','%'.request('search').'%');
         }
 
+        //requete flèche croissant et décroissant
         if(request()->has(['field','direction'])){
             $query->orderBy(request('field'), request('direction'));
         }
 
+        $tags = Tag::all();
 
-        $datas = $query->paginate(7);
+        //requête selectionner produit en fonction de la catégorie
+        if(request()->categorie){
+            $datas = (clone $query)->with('tag')->whereHas('tag',function($q){
+                $q->where('name',request()->categorie);
+            })->paginate(7);
+        }else{
+            $datas = (clone $query)->with('tag')->paginate(7);
+        }
 
         /* $data = (clone $query)->paginate(7); */
 
@@ -88,24 +102,29 @@ class FactureController extends Controller
             'filters' => request()->all(['search','field','direction']),
             'prixTotalFactureTTC' => $prixTotalFactureTTC,
             'prixTotalFactureHT' => $prixTotalFactureHT,
+            'tags' => $tags
         ]);
     }
 
     public function displayLine(Request $request)
     {
 
+
         $lines = collect();
 
         return Inertia::render('Facture/Line/index',[
-            'lines' => $lines
+            'lines' => $lines,
+
         ]);
     }
 
     public function readLines(Request $request)
     {
         $request->validate([
-            'excel_file' => 'required|mimes:xls,xlsx'
+            'excel_file' => 'required|mimes:xls,xlsx',
         ]);
+
+        $tags = Tag::get();
 
 
         $fileToUpload =  $request->excel_file;
@@ -125,7 +144,6 @@ class FactureController extends Controller
             dd('upload échoué');
         }
 
-
         $line = (new FacturesImport)->toArray($file_path);
 
         foreach($line as $lines){
@@ -134,7 +152,8 @@ class FactureController extends Controller
 
 
         return Inertia::render('Facture/Line/index',[
-            'lines' => $lines
+            'lines' => $lines,
+            'tags' => $tags
         ]);
 
     }
@@ -149,7 +168,7 @@ class FactureController extends Controller
 
         $user = User::firstWhere('role','admin');
 
-        Excel::import(new FacturesImport($fileName,$user), $request->session()->get('temp_file'));
+        Excel::import(new FacturesImport($fileName,$user,$request->tag_id), $request->session()->get('temp_file'));
 
         event(new SomeonePostedEvent($user, auth()->user()));
         //$user->notify(new FactureImport(auth()->user()));
