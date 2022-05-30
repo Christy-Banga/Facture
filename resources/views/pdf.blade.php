@@ -43,6 +43,7 @@
  </head>
  <body>
 
+    {{-- <div>type: {{ App\Models\Facture::findOrFail($datas->tag->name) }}</div> --}}
  <h4>Situation liaisons spécialisés Mois
      {{ Carbon\Carbon::parse($dateFacturation->date_facturation)->format('M Y') }} à
      {{ Carbon\Carbon::parse($dateEcheance->date_echeance)->format('M Y') }}
@@ -65,6 +66,7 @@
         <td>{{ Carbon\Carbon::parse($data->date_echeance)->format('M Y') }}</td>
         <td>{{ $data->montant_HT }}</td>
         <td>{{ $data->montant_TTC }}</td>
+        {{-- <td>{{ $data->tag->name }}</td> --}}
     </tr>
    @endforeach
    <tr class="oo">

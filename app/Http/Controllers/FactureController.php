@@ -10,14 +10,12 @@ use App\Models\Facture;
 use Illuminate\Http\Request;
 use App\Imports\FacturesImport;
 use App\Events\SomeonePostedEvent;
-use App\Notifications\SuppFacture;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use App\Notifications\FactureImport;
 use Illuminate\Support\Facades\Gate;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Redirect;
-use PhpOffice\PhpSpreadsheet\Shared\Date;
 use App\Http\Requests\StoreFactureRequest;
 use App\Http\Requests\UpdateFactureRequest;
 use App\Models\Tag;
@@ -41,7 +39,7 @@ class FactureController extends Controller
 
         $query = Facture::query();
 
-        $datas = (clone $query)->with('tag')->paginate(7);
+        $datas = (clone $query)->with('tag')->paginate(5)->withQueryString();
 
         //requete de recherche
         if(request('search')) {
@@ -56,15 +54,18 @@ class FactureController extends Controller
             $query->orderBy(request('field'), request('direction'));
         }
 
+        //Toutes les catégories
         $tags = Tag::all();
 
         //requête selectionner produit en fonction de la catégorie
         if(request()->categorie){
             $datas = (clone $query)->with('tag')->whereHas('tag',function($q){
                 $q->where('name',request()->categorie);
-            })->paginate(7);
+            })->paginate(5)
+              ->withQueryString();
+
         }else{
-            $datas = (clone $query)->with('tag')->paginate(7);
+            $datas = (clone $query)->with('tag')->paginate(5)->withQueryString();
         }
 
         /* $data = (clone $query)->paginate(7); */
@@ -75,7 +76,7 @@ class FactureController extends Controller
         $prixTotalFactureHT =  $datas->sum('montant_HT');
 
 
-        if($request->has('exportPDF')){
+        if(request()->has('exportPDF')){
             $pdf = PDF::loadView('pdf',[
                 'dateFacturation' => $dateFacturation,
                 'dateEcheance' => $dateEcheance,
@@ -84,8 +85,9 @@ class FactureController extends Controller
                 'prixTotalFactureTTC' => $prixTotalFactureTTC,
                 ]);
             return $pdf->stream();
+        }
 
-        }if($request->has('print')){
+        /* if($request->has('print')){
             $pdf = PDF::loadView('pdf',[
                 'dateFacturation' => $dateFacturation,
                 'dateEcheance' => $dateEcheance,
@@ -94,7 +96,7 @@ class FactureController extends Controller
                 'prixTotalFactureTTC' => $prixTotalFactureTTC,
                 ]);
             return $pdf->download('fact.pdf');
-        }
+        } */
 
 
         return Inertia::render('Facture/index',[
@@ -114,7 +116,6 @@ class FactureController extends Controller
 
         return Inertia::render('Facture/Line/index',[
             'lines' => $lines,
-
         ]);
     }
 

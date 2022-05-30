@@ -20,6 +20,7 @@
         <SidebarCollapsible title="Menu">
             <SidebarCollapsibleItem :href="route('facture.index')" title="Facture" :active="route().current('facture.index')" />
             <SidebarCollapsibleItem v-if="$page.props.permission.users.viewAny" :href="route('gestionnaire.index')" title="Gestionnaire" :active="route().current('gestionnaire.index')" />
+            <SidebarCollapsibleItem v-if="$page.props.permission.users.viewAny" :href="route('categorie.create')" title="Catégorie" :active="route().current('categorie.create')" />
             <SidebarCollapsibleItem :href="route('incoherence')" title="Incoherence" :active="route().current('incoherence')" />
         </SidebarCollapsible>
 

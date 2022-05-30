@@ -31,8 +31,6 @@ class Facture extends Model
 
         self::creating(function($facture){
             $facture->user()->associate(auth()->user()->id);
-          /*   $facture->tag()->associate(request()->tag);
-            dd($facture); */
         });
     }
 

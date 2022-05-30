@@ -31,18 +31,18 @@
                 <div class="flex items-center justify-between">
                     <label class="flex items-center">
                         <Checkbox name="remember" v-model:checked="form.remember" />
-                        <span class="ml-2 text-sm text-gray-600">Remember me</span>
+                        <span class="ml-2 text-sm text-gray-600">Souviens-toi de moi</span>
                     </label>
 
                     <Link v-if="canResetPassword" :href="route('password.request')" class="text-sm text-blue-500 hover:underline">
-                        Forgot your password?
+                        Mot de passe oublié?
                     </Link>
                 </div>
 
                 <div>
                     <Button class="justify-center gap-2 w-full" :disabled="form.processing" v-slot="{iconSizeClasses}">
                         <LoginIcon aria-hidden="true" :class="iconSizeClasses" />
-                        <span>Log in</span>
+                        <span>Se connecter</span>
                     </Button>
                 </div>
 
