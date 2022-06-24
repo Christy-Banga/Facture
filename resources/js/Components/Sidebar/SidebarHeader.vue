@@ -5,27 +5,27 @@
             <ApplicationLogo aria-hidden="true" class="w-10 h-auto" />
         </Link>
 
-        <Button 
-            iconOnly 
-            variant="secondary" 
-            type="button" 
+        <Button
+            iconOnly
+            variant="secondary"
+            type="button"
             v-slot="{ iconSizeClasses }"
             v-show="sidebarState.isOpen || sidebarState.isHovered"
             @click="sidebarState.isOpen = !sidebarState.isOpen"
             :srText="sidebarState.isOpen ? 'Close sidebar' : 'Open sidebar'"
         >
-            <MenuFoldLineLeftIcon 
-                aria-hidden="true" 
-                v-show="sidebarState.isOpen" 
-                :class="['hidden lg:block', iconSizeClasses]" />
-
-            <MenuFoldLineRightIcon 
+            <MenuFoldLineLeftIcon
                 aria-hidden="true"
-                v-show="!sidebarState.isOpen"  
+                v-show="sidebarState.isOpen"
                 :class="['hidden lg:block', iconSizeClasses]" />
 
-            <XIcon 
-                aria-hidden="true" 
+            <MenuFoldLineRightIcon
+                aria-hidden="true"
+                v-show="!sidebarState.isOpen"
+                :class="['hidden lg:block', iconSizeClasses]" />
+
+            <XIcon
+                aria-hidden="true"
                 :class="['lg:hidden', iconSizeClasses]" />
         </Button>
     </div>

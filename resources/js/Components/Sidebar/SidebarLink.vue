@@ -18,7 +18,7 @@
         </slot>
 
         <span
-            class="text-base font-medium"
+            class="text-base font-medium text-white"
             v-show="sidebarState.isOpen || sidebarState.isHovered"
         >
             {{ title }}

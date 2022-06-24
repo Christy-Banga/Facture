@@ -1,15 +1,15 @@
 <template>
-    <GuestLayout title="Log in">
+    <GuestLayout title="Connexion">
         <ValidationErrors class="mb-4" />
 
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+        <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
             {{ status }}
         </div>
 
         <form @submit.prevent="submit">
             <div class="grid gap-6">
                 <div class="space-y-2">
-                    <Label for="login" value="Username" />
+                    <Label for="login" value="Nom d'utilisateur" />
                     <InputIconWrapper>
                         <template #icon>
                             <MailIcon aria-hidden="true" class="w-5 h-5" />
@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="space-y-2">
-                    <Label for="password" value="Password" />
+                    <Label for="password" value="Mot de passe" />
                     <InputIconWrapper>
                         <template #icon>
                             <LockClosedIcon aria-hidden="true" class="w-5 h-5" />
@@ -40,7 +40,7 @@
                 </div>
 
                 <div>
-                    <Button class="justify-center gap-2 w-full" :disabled="form.processing" v-slot="{iconSizeClasses}">
+                    <Button class="justify-center w-full gap-2" :disabled="form.processing" v-slot="{iconSizeClasses}">
                         <LoginIcon aria-hidden="true" :class="iconSizeClasses" />
                         <span>Se connecter</span>
                     </Button>

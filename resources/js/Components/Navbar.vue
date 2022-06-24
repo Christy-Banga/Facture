@@ -75,8 +75,7 @@
             </Button>
 
             <Link :href="route('notifications')" class="pl-3" v-if="$page.props.permission.users.viewAny">
-                <span id="js-count" v-if="unreadNotifications > 0" class="text-white text-xs bg-red-600
-                        rounded-full px-2 py-1 absolute bottom-9 ml-2">
+                <span id="js-count" v-if="unreadNotifications > 0" class="absolute px-2 py-1 ml-2 text-xs text-white bg-red-600 rounded-full bottom-9">
                         {{ unreadNotifications }}
                 </span>
 
@@ -94,7 +93,7 @@
                     <span class="inline-flex rounded-md">
                         <button
                             type="button"
-                            class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md  hover:text-gray-700  dark:focus:ring-offset-dark-eval-1 dark:bg-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200"
+                            class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md hover:text-gray-700 dark:focus:ring-offset-dark-eval-1 dark:bg-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200"
                         >
                             {{ $page.props.auth.user.name }}
 

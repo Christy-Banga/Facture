@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
 
+
     <style>
         table {
         font-family: arial, sans-serif;
@@ -39,9 +40,30 @@
         .prix{
             font-size: 20px;
         }
+
+         .eco2{
+            padding-left: 40%;
+            padding-top: -12%;
+        }
+        .eco3{
+            padding-left: 69%;
+            padding-top: -38%;
+        }
     </style>
  </head>
  <body>
+
+    <div class="eco1" style="height: 50px; width:200px">
+        <div><img src="img/eco1.jpg" /></div>
+    </div>
+
+    <div class="eco2" style="height: 20%; width:15%;">
+        <div><img src="img/eco2.png" /></div>
+    </div>
+
+    <div class="eco3" style="height: 50px; width:200px">
+        <div><img src="img/eco3.jpeg" /></div>
+    </div>
 
     {{-- <div>type: {{ App\Models\Facture::findOrFail($datas->tag->name) }}</div> --}}
  <h4>Situation liaisons spécialisés Mois

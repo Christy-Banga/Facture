@@ -17,7 +17,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Tag::all();
+        return Inertia::render('Tag/index',compact('tags'));
     }
 
     /**
@@ -27,8 +28,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        $tags = Tag::all();
-        return Inertia::render('Tag/create',compact('tags'));
+        return Inertia::render('Tag/create');
     }
 
     /**
@@ -43,7 +43,11 @@ class TagController extends Controller
             'name' => $request->name
         ]);
 
-        return back()->with('success','La catégorie a bien été ajoutée!');
+        return Redirect::route('categorie.index')->with('success','La catégorie a bien été ajoutée!');
+
+        $this->reset();
+
+
     }
 
     /**
@@ -84,7 +88,7 @@ class TagController extends Controller
 
         $tag->update($request->all());
 
-        return Redirect::route('categorie.create')->with('warning','Le gestionnaire a été modifié!');
+        return Redirect::route('categorie.index')->with('warning','Le gestionnaire a été modifié!');
     }
 
     /**
@@ -98,6 +102,6 @@ class TagController extends Controller
         $tag = Tag::findOrFail($id);
         $tag->delete();
 
-        return Redirect::route('categorie.create')->with('danger','La catégorie a été supprimée!');
+        return Redirect::route('categorie.index')->with('danger','La catégorie a été supprimée!');
     }
 }

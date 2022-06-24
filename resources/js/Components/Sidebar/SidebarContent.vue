@@ -2,16 +2,16 @@
     <PerfrectScrollbar
         tagname="nav"
         aria-label="main"
-        class="relative flex flex-col flex-1 max-h-full gap-4 px-3"
+        class="relative flex flex-col flex-1 max-h-full gap-4 px-3 text-white"
     >
         <SidebarLink
-            title="Dashboard"
+            title="Tableau de bord" class="text-white bg-sky-700 hover:bg-sky-800 dark:hover:bg-sky-800"
             :href="route('dashboard')"
             :active="route().current('dashboard')"
         >
             <template #icon>
                 <DashboardIcon
-                    class="flex-shrink-0 w-6 h-6"
+                    class="flex-shrink-0 w-6 h-6 text-white"
                     aria-hidden="true"
                 />
             </template>
@@ -20,7 +20,7 @@
         <SidebarCollapsible title="Menu">
             <SidebarCollapsibleItem :href="route('facture.index')" title="Facture" :active="route().current('facture.index')" />
             <SidebarCollapsibleItem v-if="$page.props.permission.users.viewAny" :href="route('gestionnaire.index')" title="Gestionnaire" :active="route().current('gestionnaire.index')" />
-            <SidebarCollapsibleItem v-if="$page.props.permission.users.viewAny" :href="route('categorie.create')" title="Catégorie" :active="route().current('categorie.create')" />
+            <SidebarCollapsibleItem v-if="$page.props.permission.users.viewAny" :href="route('categorie.index')" title="Catégorie" :active="route().current('categorie.create')" />
             <SidebarCollapsibleItem :href="route('incoherence')" title="Incoherence" :active="route().current('incoherence')" />
         </SidebarCollapsible>
 

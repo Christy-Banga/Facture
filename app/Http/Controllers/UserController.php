@@ -130,9 +130,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        sleep(1);
         $user = User::find($id);
         $user->delete();
 
-        return Redirect::route('gestionnaire.index')->with('danger','Le gestionnaire a été supprimé!');
+        return back()->with('danger','Le gestionnaire a été supprimé!');
     }
 }

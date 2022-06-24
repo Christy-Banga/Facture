@@ -31,6 +31,7 @@ class FactureController extends Controller
      */
     public function index(Request $request)
     {
+        $perPage = request()->input('perPage') ? : 5;
 
         request()->validate([
             'direction' => ['in:asc,desc'],
@@ -39,7 +40,7 @@ class FactureController extends Controller
 
         $query = Facture::query();
 
-        $datas = (clone $query)->with('tag')->paginate(5)->withQueryString();
+        $datas = (clone $query)->with('tag')->paginate($perPage)->withQueryString();
 
         //requete de recherche
         if(request('search')) {
@@ -61,11 +62,11 @@ class FactureController extends Controller
         if(request()->categorie){
             $datas = (clone $query)->with('tag')->whereHas('tag',function($q){
                 $q->where('name',request()->categorie);
-            })->paginate(5)
+            })->paginate($perPage)
               ->withQueryString();
 
         }else{
-            $datas = (clone $query)->with('tag')->paginate(5)->withQueryString();
+            $datas = (clone $query)->with('tag')->paginate($perPage)->withQueryString();
         }
 
         /* $data = (clone $query)->paginate(7); */
@@ -171,8 +172,9 @@ class FactureController extends Controller
 
         Excel::import(new FacturesImport($fileName,$user,$request->tag_id), $request->session()->get('temp_file'));
 
-        event(new SomeonePostedEvent($user, auth()->user()));
-        //$user->notify(new FactureImport(auth()->user()));
+
+        /* event(new SomeonePostedEvent($user, auth()->user())); */
+        $user->notify(new FactureImport(auth()->user()));
 
         File::move($request->session()->get('temp_file'), storage_path('app/public/'.$fileName));
 
