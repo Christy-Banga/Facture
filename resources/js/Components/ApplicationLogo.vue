@@ -1,3 +1,3 @@
 <template>
-    <img src="/img/mini2.png" alt="" class="h-24 w-44">
+    <img src="/img/mini2.png" alt="" class="w-40 h-24">
 </template>

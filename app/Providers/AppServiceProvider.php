@@ -2,9 +2,8 @@
 
 namespace App\Providers;
 
-use Carbon\Carbon;
 use App\Models\User;
-use Illuminate\Support\Facades\URL;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -27,9 +26,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (env('APP_ENV') != 'local') {
-            URL::forceScheme('https');
-        }
         Gate::before(function(User $user, $ability){
             if($user->checkRole('admin')){
                 return true;
