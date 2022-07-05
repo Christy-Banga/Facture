@@ -17,7 +17,7 @@ class MonthlyFactureChart
 
     public function build($year=null): array
     {
-        $nombreFactureMois = Facture::select(DB::raw("COUNT(*) as count, to_char(Month(created_at) as mois"))
+        $nombreFactureMois = Facture::select(DB::raw("COUNT(*) as count, Month(created_at) as mois"))
                     ->when(is_null($year),function($q){
                         $q->whereYear('created_at', date('Y'));
                     })
@@ -26,9 +26,9 @@ class MonthlyFactureChart
                         $q->whereYear('created_at', $year);
                     })
                     ->groupBy(DB::raw("Month(created_at)"))
-                    ->orderBy(DB::raw("Month(created_at)"))
-                    ->pluck('count','mois');
-
+                    ->orderBy(DB::raw("Month(created_at)"));
+                    /* ->pluck('count','mois');
+ */
 
         for($i=0; $i<12; $i++){
             if(isset($nombreFactureMois[$i+1]))
