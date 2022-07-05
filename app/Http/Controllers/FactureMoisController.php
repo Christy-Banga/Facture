@@ -44,7 +44,7 @@ class FactureMoisController extends Controller
     }
 
     public function fetch_year(){
-        $years =  Facture::selectRaw("DATE_FORMAT(created_at, '%Y') AS year")
+        $years =  Facture::selectRaw("to_char(created_at, '%Y') AS year")
         ->groupBy('year')
         ->get();
         return $years;
