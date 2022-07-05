@@ -32,6 +32,7 @@ class FacturesImport implements ToModel,WithHeadingRow
             'nom_fournisseur' => $row['nom_affiche_du_partenaire_de_la_facture'],
             'date_facturation' => $this->transformDate($row['date_de_facturation']),
             'date_echeance' => $this->transformDate($row['date_decheance']),
+            'reference' => $row['reference'],
             'montant_HT' => $row['montant_ht'],
             'montant_TTC' => $row['total'],
             'etat_paiement' => $row['etat_du_paiement'],

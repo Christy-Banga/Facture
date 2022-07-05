@@ -35,7 +35,7 @@ class FactureController extends Controller
 
         request()->validate([
             'direction' => ['in:asc,desc'],
-            'field' => ['in:numero_facture,nom_fournisseur,date_facturation,date_echeance,montant_HT,montant_TTC,etat_paiement']
+            'field' => ['in:numero_facture,nom_fournisseur,reference,date_facturation,date_echeance,montant_HT,montant_TTC,etat_paiement']
         ]);
 
         $query = Facture::query();
@@ -46,6 +46,7 @@ class FactureController extends Controller
         if(request('search')) {
             $query->where('numero_facture','LIKE','%'.request('search').'%')
                   ->orWhere('nom_fournisseur','LIKE','%'.request('search').'%')
+                  ->orWhere('reference','LIKE','%'.request('search').'%')
                   ->orWhere('date_facturation','LIKE','%'.request('search').'%')
                   ->orWhere('date_echeance','LIKE','%'.request('search').'%');
         }
@@ -57,6 +58,7 @@ class FactureController extends Controller
 
         //Toutes les catégories
         $tags = Tag::all();
+        $tag = Tag::where('name')->get()->first();
 
         //requête selectionner produit en fonction de la catégorie
         if(request()->categorie){
@@ -88,16 +90,17 @@ class FactureController extends Controller
             return $pdf->stream();
         }
 
-        /* if($request->has('print')){
+        if($request->has('print')){
             $pdf = PDF::loadView('pdf',[
                 'dateFacturation' => $dateFacturation,
                 'dateEcheance' => $dateEcheance,
                 'datas' => $datas,
                 'prixTotalFactureHT' => $prixTotalFactureHT,
                 'prixTotalFactureTTC' => $prixTotalFactureTTC,
+                'tag' => $tag
                 ]);
             return $pdf->download('fact.pdf');
-        } */
+        }
 
 
         return Inertia::render('Facture/index',[

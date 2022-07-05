@@ -104,7 +104,7 @@
             </div>
 
 
-
+    <div v-if="factures.length != 0">
         <div class="flex justify-start pt-2">
             <div class="max-w-xs mb-4">
                 <input type="search" v-model="params.search" aria-label="Search" placeholder="Que recherchez-vous?"
@@ -150,6 +150,16 @@
                                 <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z"/>
                             </svg>
                             <svg v-if="params.field === 'nom_fournisseur' && params.direction === 'desc'" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"/>
+                            </svg>
+                        </span>
+                    </th>
+                     <th class="p-2 text-sm font-semibold tracking-wide text-left">
+                        <span class="inline-flex justify-between w-full" @click="sort('reference')">Reference
+                            <svg v-if="params.field === 'reference' && params.direction === 'asc'" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z"/>
+                            </svg>
+                            <svg v-if="params.field === 'reference' && params.direction === 'desc'" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
                                 <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"/>
                             </svg>
                         </span>
@@ -212,13 +222,14 @@
                     <td class="p-2 text-sm text-gray-700 dark:text-gray-300 whitespace-nowrap">{{facture.numero_facture}}</td>
                     <td class="p-2 text-sm text-gray-700 dark:text-gray-300 whitespace-nowrap">{{facture.nom_fournisseur}}</td>
 <!--                     <td class="p-2 text-sm text-gray-700 dark:text-gray-300 whitespace-nowrap">{{moment(facture.date_facturation).format('MMMM YYYY')}}</td> -->
+                    <td class="p-2 text-sm text-gray-700 dark:text-gray-300 whitespace-nowrap">{{facture.reference}}</td>
                     <td class="p-2 text-sm text-gray-700 dark:text-gray-300 whitespace-nowrap">{{facture.date_facturation}}</td>
                   <td class="p-2 text-sm text-gray-700 dark:text-gray-300 whitespace-nowrap">{{facture.date_echeance}}</td>
                     <td class="p-2 px-4 text-sm text-gray-700 dark:text-gray-300 whitespace-nowrap">{{facture.montant_HT}} Dhs</td>
                     <td class="p-2 px-6 text-sm text-gray-700 dark:text-gray-300 whitespace-nowrap">{{facture.montant_TTC}} Dhs</td>
                     <td class="px-4 text-sm text-gray-700 dark:text-white whitespace-nowrap">
-                        <span v-if="facture.etat_paiement === 'Non payées'" class="px-2 py-1 font-semibold leading-tight text-red-300 rounded-sm">{{facture.etat_paiement}}</span>
-                        <span v-else class="px-4 py-1 font-semibold leading-tight text-green-700 rounded-sm">{{facture.etat_paiement}}</span>
+                        <span v-if="facture.etat_paiement === 'Non payées'" class="px-2 py-1 font-semibold leading-tight text-red-400 rounded-sm">{{facture.etat_paiement}}</span>
+                        <span v-else class="px-2 py-1 font-semibold leading-tight text-green-700 rounded-sm">{{facture.etat_paiement}}</span>
                     </td>
                     <td v-if="$page.props.permission.users.create" class="px-6 py-3 text-center">
                         <div class="flex justify-center item-center" >
@@ -272,7 +283,11 @@
                 </div>
             </div>
         </div> -->
+</div>
 
+<div v-else>
+    PAsde facture
+</div>
 
         <pagination class="mt-6" :links="factures.links"/>
 

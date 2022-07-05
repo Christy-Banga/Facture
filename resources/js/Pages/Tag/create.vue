@@ -17,8 +17,13 @@
                         <div class="py-2 my-1 text-red-500 bg-red-200" v-if="form.errors.name">{{ form.errors.name }}</div>
                     </div>
 
-                    <div class="flex p-1">
-                        <button type="submit" class="p-2 text-white bg-gray-500 rounded hover:bg-gray-400" required>Ajouter</button>
+                    <div class="flex items-stretch">
+                        <div class="flex p-1">
+                            <Link :href="route('categorie.index')" type="submit" class="p-2 text-white bg-purple-600 rounded hover:bg-purple-800 dark:bg-purple-700 dark:hover:bg-purple-800">Retour</Link>
+                        </div>
+                        <div class="flex p-1">
+                            <button type="submit" class="p-2 text-white bg-gray-500 rounded hover:bg-gray-400" required>Ajouter</button>
+                        </div>
                     </div>
                 </form>
             </div>

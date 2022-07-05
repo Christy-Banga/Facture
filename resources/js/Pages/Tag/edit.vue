@@ -24,7 +24,7 @@
 
                             <div class="flex items-stretch">
                                 <div class="flex p-1">
-                                    <Link :href="route('categorie.create')" type="submit" class="float-right p-2 px-3 py-2 text-white bg-purple-600 rounded hover:bg-purple-800 dark:bg-purple-700 dark:hover:bg-purple-800">Retour</Link>
+                                    <Link :href="route('categorie.index')" class="float-right p-2 px-3 py-2 text-white bg-purple-600 rounded hover:bg-purple-800 dark:bg-purple-700 dark:hover:bg-purple-800">Retour</Link>
                                 </div>
                                 <div class="flex p-1">
                                     <button type="submit" class="p-2 text-white transition duration-200 ease-in bg-blue-600 rounded shadow hover:bg-blue-700 active:shadow-lg mouse focus:outline-none">Modifier</button>

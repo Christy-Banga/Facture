@@ -9,29 +9,29 @@
         </template>
 
             <div class="py-4">
-                <div class="container mx-auto px-6 py-0">
+                <div class="container px-6 py-0 mx-auto">
                                 <!-- component -->
-                    <div class="relative py-3 w-11/12 max-w-xl sm:mx-auto">
-                    <div>La facture <span class="font-bold text-sm">{{ monttMaxFac.numero_facture }}</span> à le plus grand montant qui est de <span class="font-bold text-sm">{{ monttMaxFac.montant_TTC }}</span> dhs</div>
-                    <div>La facture <span class="font-bold text-sm">{{ monttMinFac.numero_facture }}</span> à le plus petit montant qui est de <span class="font-bold text-sm">{{ monttMinFac.montant_TTC }}</span> dhs</div>
-                    <div>La somme de toutes les factures est de <span class="font-bold text-sm">{{ prixTotalFacture }}</span> dhs</div>
+                    <div class="relative w-11/12 max-w-xl py-3 sm:mx-auto">
+                    <div>La facture <span class="text-sm font-bold">{{ monttMaxFac.numero_facture }}</span> a le plus grand montant qui est de <span class="text-sm font-bold">{{ monttMaxFac.montant_TTC }}</span> dhs</div>
+                    <div>La facture <span class="text-sm font-bold">{{ monttMinFac.numero_facture }}</span> a le plus petit montant qui est de <span class="text-sm font-bold">{{ monttMinFac.montant_TTC }}</span> dhs</div>
+                    <div>La somme de toutes les factures est de <span class="text-sm font-bold">{{ prixTotalFacture }}</span> dhs</div>
 
-                <div class="py-3">
-                    <Link href="#" class="bg-blue-500 px-2 p-1 text-white rounded">Generer un report</Link>
-                </div>
+               <!--  <div class="py-3">
+                    <Link href="#" class="p-1 px-2 text-white bg-blue-500 rounded">Generer un report</Link>
+                </div> -->
     <!--
                         <div class="relative p-8 bg-white shadow-sm sm:rounded-xl">
                         <form class="w-full" @submit.prevent="submit">
-                            <div class="mb-5 relative">
-                            <input type="number" v-model="form.valeur_global" class="peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent" placeholder="name@example.com" autocomplete="off" />
-                            <label for="valeur_global" class="peer-placeholder-shown:opacity-100   opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Valeur globale</label>
+                            <div class="relative mb-5">
+                            <input type="number" v-model="form.valeur_global" class="w-full h-16 p-3 pt-8 placeholder-transparent border border-gray-200 rounded-md peer focus:outline-none focus:border-gray-500 focus:shadow-sm" placeholder="name@example.com" autocomplete="off" />
+                            <label for="valeur_global" class="absolute top-0 left-0 h-full px-3 py-5 transition-all duration-100 ease-in-out origin-left transform scale-75 translate-x-1 -translate-y-3 opacity-75 pointer-events-none peer-placeholder-shown:opacity-100 peer-focus:opacity-75 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 peer-focus:translate-x-1">Valeur globale</label>
                             </div>
-                            <div class="mb-5 relative">
-                            <input type="password" id="password" class="peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent" placeholder="password" autocomplete="off" />
-                            <label for="password" class="peer-placeholder-shown:opacity-100   opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Password</label>
+                            <div class="relative mb-5">
+                            <input type="password" id="password" class="w-full h-16 p-3 pt-8 placeholder-transparent border border-gray-200 rounded-md peer focus:outline-none focus:border-gray-500 focus:shadow-sm" placeholder="password" autocomplete="off" />
+                            <label for="password" class="absolute top-0 left-0 h-full px-3 py-5 transition-all duration-100 ease-in-out origin-left transform scale-75 translate-x-1 -translate-y-3 opacity-75 pointer-events-none peer-placeholder-shown:opacity-100 peer-focus:opacity-75 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 peer-focus:translate-x-1">Password</label>
                             </div>
-                            <button type="submit" class="w-full bg-indigo-600 text-white p-3 rounded-md">
-                                <svg v-show="isLoading" class="w-5 h-5 text-white animate-spin absolute ml-4" fill="none"
+                            <button type="submit" class="w-full p-3 text-white bg-indigo-600 rounded-md">
+                                <svg v-show="isLoading" class="absolute w-5 h-5 ml-4 text-white animate-spin" fill="none"
                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                     <path class="opacity-75"
@@ -45,7 +45,7 @@
                         </form>
                         </div>
                         <div class="py-3">
-                            <div v-if="$page.props.flash.success"  class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                            <div v-if="$page.props.flash.success"  class="relative px-4 py-3 text-green-700 bg-green-100 border border-green-400 rounded" role="alert">
                                 <span class="block sm:inline">{{ $page.props.flash.success }}</span>
                             </div>
                         </div> -->

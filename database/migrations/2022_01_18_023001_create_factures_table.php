@@ -21,6 +21,7 @@ class CreateFacturesTable extends Migration
             $table->string('nom_fournisseur');
             $table->date('date_facturation');
             $table->date('date_echeance');
+            $table->string('reference');
             $table->float('montant_HT');
             $table->float('montant_TTC');
             $table->string('etat_paiement');

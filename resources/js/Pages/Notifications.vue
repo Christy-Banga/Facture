@@ -20,7 +20,7 @@
                 <div class="flex flex-wrap p-4 -mx-6 border-b border-gray-200">
 
                   <span class="font-bold" >{{ notification.data.info.name }}</span> <span class="ml-1">a ajouté une facture</span> -
-                  {{ moment(notification.data.info.sent).fromNow()}}
+                  <i>{{ moment(notification.data.info.sent).fromNow()}}</i>
 
                     <Link @click="destroy(notification.id)" class="w-5 ml-4 text-red-600 transform hover:text-red-400 hover:scale-110">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -31,10 +31,6 @@
                 </div>
 
             </div>
-
-
-
-
         </div>
 
     </AuthenticatedLayout>

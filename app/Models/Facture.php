@@ -17,6 +17,7 @@ class Facture extends Model
         'nom_fournisseur',
         'date_facturation',
         'date_echeance',
+        'reference',
         'montant_HT',
         'montant_TTC',
         'etat_paiement',

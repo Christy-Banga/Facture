@@ -88,48 +88,54 @@
 			</div>
 		</div>
 
-        <div class="py-6">
-            <div class="overflow-auto rounded-lg shadow">
-                <table class="w-full">
-                    <thead class="border-b-2 border-gray-200 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 dark:border-gray-700">
-                        <tr>
-                            <th class="p-2 text-sm font-semibold tracking-wide text-left">
-                                <span class="inline-flex justify-between w-full">Name
-                                        <!-- <svg v-if="params.field === 'numero_facture' && params.direction === 'asc'" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z"/>
-                                        </svg>
-                                        <svg v-if="params.field === 'numero_facture' && params.direction === 'desc'" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"/>
-                                        </svg> -->
-                                </span>
-                            </th>
-
-                            <th v-if="$page.props.permission.users.create">Actions</th>
-                        </tr>
-                    </thead>
-
-                    <tbody v-for="tag in tags" :key="tag.id" class="divide-y divide-gray-100">
-                            <tr class="bg-white dark:bg-gray-800">
-                                <td class="p-2 text-sm text-gray-700 dark:text-gray-300 whitespace-nowrap">{{tag.name}}</td>
-
-                                <td v-if="$page.props.permission.users.create" class="px-6 py-2 text-center">
-                                    <div class="flex justify-center item-center">
-                                        <Link :href="route('categorie.edit', tag.id)" class="w-4 mr-2 text-purple-900 transform hover:text-purple-500 hover:scale-110">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="dark:text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+        <div v-if="tags != 0">
+            <div class="py-6">
+                <div class="overflow-auto rounded-lg shadow">
+                    <table class="w-full">
+                        <thead class="border-b-2 border-gray-200 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 dark:border-gray-700">
+                            <tr>
+                                <th class="p-2 text-sm font-semibold tracking-wide text-left">
+                                    <span class="inline-flex justify-between w-full">Name
+                                            <!-- <svg v-if="params.field === 'numero_facture' && params.direction === 'asc'" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+                                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z"/>
                                             </svg>
-                                        </Link>
-                                        <Link  @click="destroy(tag.id)" class="w-4 mr-2 text-red-600 transform hover:text-red-400 hover:scale-110">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                            </svg>
-                                        </Link>
-                                    </div>
-                                </td>
+                                            <svg v-if="params.field === 'numero_facture' && params.direction === 'desc'" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+                                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"/>
+                                            </svg> -->
+                                    </span>
+                                </th>
+
+                                <th v-if="$page.props.permission.users.create">Actions</th>
                             </tr>
-                    </tbody>
-                </table>
+                        </thead>
+
+                        <tbody v-for="tag in tags" :key="tag.id" class="divide-y divide-gray-100">
+                                <tr class="bg-white dark:bg-gray-800">
+                                    <td class="p-2 text-sm text-gray-700 dark:text-gray-300 whitespace-nowrap">{{tag.name}}</td>
+
+                                    <td v-if="$page.props.permission.users.create" class="px-6 py-2 text-center">
+                                        <div class="flex justify-center item-center">
+                                            <Link :href="route('categorie.edit', tag.id)" class="w-4 mr-2 text-purple-900 transform hover:text-purple-500 hover:scale-110">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="dark:text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                                </svg>
+                                            </Link>
+                                            <Link  @click="destroy(tag.id)" class="w-4 mr-2 text-red-600 transform hover:text-red-400 hover:scale-110">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </Link>
+                                        </div>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+        </div>
+
+        <div class="text-center" v-else>
+            <span class="text-2xl">Aucune catégorie</span>
         </div>
 
     </AuthenticatedLayout>
