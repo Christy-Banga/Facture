@@ -165,7 +165,6 @@ class FactureController extends Controller
 
     public function saveFile(Request $request)
     {
-        sleep(1);
 
         $request->session()->get('temp_file');
 

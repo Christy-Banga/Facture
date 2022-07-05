@@ -65,7 +65,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        sleep(1);
+
         User::create(
             $request->validate([
                 'name' => ['required', 'max:50'],
@@ -130,7 +130,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        sleep(1);
+
         $user = User::find($id);
         $user->delete();
 
