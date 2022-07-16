@@ -1,5 +1,5 @@
 <template>
-    <AuthenticatedLayout title="Dashboard">
+    <AuthenticatedLayout title="Incoherence">
         <template #header>
             <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <h2 class="text-xl font-semibold leading-tight">
@@ -9,11 +9,11 @@
         </template>
 
             <div class="py-4">
-                <div class="container px-6 py-0 mx-auto">
+                <div class="container py-0 mx-auto text-lg text-center">
                                 <!-- component -->
-                    <div class="relative w-11/12 max-w-xl py-3 sm:mx-auto">
-                    <div>La facture <span class="text-sm font-bold">{{ monttMaxFac.numero_facture }}</span> a le plus grand montant qui est de <span class="text-sm font-bold">{{ monttMaxFac.montant_TTC }}</span> dhs</div>
-                    <div>La facture <span class="text-sm font-bold">{{ monttMinFac.numero_facture }}</span> a le plus petit montant qui est de <span class="text-sm font-bold">{{ monttMinFac.montant_TTC }}</span> dhs</div>
+                    <div class="relative w-full max-w-full py-3 sm:mx-auto">
+                    <div v-if="monttMaxFac">La facture <span class="text-sm font-bold">{{ monttMaxFac.numero_facture }}</span> a le plus grand montant qui est de <span class="text-sm font-bold">{{ monttMaxFac.montant_TTC }}</span> dhs</div>
+                    <div v-if="monttMinFac">La facture <span class="text-sm font-bold">{{ monttMinFac.numero_facture }}</span> a le plus petit montant qui est de <span class="text-sm font-bold">{{ monttMinFac.montant_TTC }}</span> dhs</div>
                     <div>La somme de toutes les factures est de <span class="text-sm font-bold">{{ prixTotalFacture }}</span> dhs</div>
 
                <!--  <div class="py-3">

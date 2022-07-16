@@ -126,6 +126,13 @@
                     </svg>
                 </button>
             </form>
+            <div class="absolute p-3 right-6 top-60 ">
+            <select v-model="perPage" @change="getFact" class="w-32 px-4 py-3 text-sm border-transparent rounded-md dark:bg-gray-800 focus:border-gray-500 focus:bg-white focus:ring-0" name="" id="">
+                <option value="5">5 par page</option>
+                <option value="10">10 par page</option>
+                <option value="15">15 par page</option>
+            </select>
+        </div>
         </div>
 
 
@@ -227,7 +234,7 @@
                   <td class="p-2 text-sm text-gray-700 dark:text-gray-300 whitespace-nowrap">{{facture.date_echeance}}</td>
                     <td class="p-2 px-4 text-sm text-gray-700 dark:text-gray-300 whitespace-nowrap">{{facture.montant_HT}} Dhs</td>
                     <td class="p-2 px-6 text-sm text-gray-700 dark:text-gray-300 whitespace-nowrap">{{facture.montant_TTC}} Dhs</td>
-                    <td class="px-4 text-sm text-gray-700 dark:text-white whitespace-nowrap">
+                    <td class="px-6 text-sm text-gray-700 dark:text-white whitespace-nowrap">
                         <span v-if="facture.etat_paiement === 'Non payées'" class="px-2 py-1 font-semibold leading-tight text-red-400 rounded-sm">{{facture.etat_paiement}}</span>
                         <span v-else class="px-2 py-1 font-semibold leading-tight text-green-700 rounded-sm">{{facture.etat_paiement}}</span>
                     </td>
@@ -247,7 +254,7 @@
                     </td>
                 </tr>
             </tbody>
-                <tr>
+                <tr class="w-full">
                     <td></td>
                     <td class="pl-5 text-2xl">Total</td>
                     <td></td>
@@ -260,13 +267,7 @@
             </table>
         </div>
 
-          <div class="absolute p-3 right-6 top-64 ">
-            <select v-model="perPage" @change="getFact" class="w-32 px-4 py-3 text-sm border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0" name="" id="">
-                <option value="5">5 par page</option>
-                <option value="10">10 par page</option>
-                <option value="15">15 par page</option>
-            </select>
-        </div>
+
 
 
 
